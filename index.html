@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bring Back Guilford Shoreline Oktoberfest</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --amber: #C8761A;
+    --deep-amber: #8B4A0A;
+    --cream: #F5EDD6;
+    --forest: #2C4A2E;
+    --rust: #9B3A1A;
+    --gold: #D4A017;
+    --dark: #1A1208;
+    --bark: #5C3D1E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--dark);
+    color: var(--cream);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV TABS */
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(26,18,8,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(200,118,26,0.25);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+  .nav-tab {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #7a6a4a;
+    padding: 1rem 1.8rem;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav-tab:hover { color: var(--cream); }
+  .nav-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 3rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(200,118,26,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(155,58,26,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(44,74,46,0.20) 0%, transparent 50%),
+      var(--dark);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8761A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  .leaf {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0.12;
+    animation: drift 12s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .leaf:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; font-size: 2.5rem; }
+  .leaf:nth-child(2) { top: 20%; right: 8%; animation-delay: 2s; font-size: 4rem; }
+  .leaf:nth-child(3) { bottom: 25%; left: 12%; animation-delay: 4s; font-size: 3.5rem; }
+  .leaf:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 1s; font-size: 2rem; }
+  .leaf:nth-child(5) { top: 50%; left: 2%; animation-delay: 6s; font-size: 5rem; }
+
+  @keyframes drift {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-18px) rotate(5deg); }
+    66% { transform: translateY(10px) rotate(-3deg); }
+  }
+
+  .badge {
+    display: inline-block;
+    border: 2px solid var(--amber);
+    color: var(--amber);
+    font-family: 'Special Elite', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-year {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 900;
+    line-height: 0.85;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--amber);
+    opacity: 0.15;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--cream);
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.9s 0.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-title .accent { color: var(--amber); }
+
+  .hero-sub {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-style: italic;
+    color: #b8a882;
+    margin-top: 1.5rem;
+    max-width: 560px;
+    line-height: 1.7;
+    animation: fadeUp 1s 0.4s ease forwards;
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 1s 0.6s ease forwards;
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn {
+    padding: 0.9rem 2.2rem;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--amber); color: var(--dark); }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,118,26,0.35); }
+  .btn-outline { background: transparent; color: var(--cream); border: 2px solid var(--cream); }
+  .btn-outline:hover { background: var(--cream); color: var(--dark); transform: translateY(-2px); }
+  .btn-green { background: var(--forest); color: var(--cream); border: 2px solid #4a8a4c; }
+  .btn-green:hover { background: #3a6a3c; transform: translateY(-2px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--amber), transparent);
+  }
+  .divider-icon { color: var(--amber); font-size: 1.5rem; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* STORY */
+  .story {
+    background: linear-gradient(135deg, #1f1607 0%, #150e04 100%);
+    border-top: 1px solid rgba(200,118,26,0.2);
+    border-bottom: 1px solid rgba(200,118,26,0.2);
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .story-grid h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .story-grid h2 em { color: var(--amber); font-style: italic; }
+  .story-grid p { color: #a89870; line-height: 1.9; font-size: 1rem; margin-bottom: 1rem; }
+
+  .memory-card {
+    background: rgba(200,118,26,0.08);
+    border: 1px solid rgba(200,118,26,0.25);
+    padding: 2.5rem;
+    position: relative;
+  }
+  .memory-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: var(--amber);
+    opacity: 0.15;
+    position: absolute;
+    top: -1rem;
+    left: 1rem;
+    line-height: 1;
+  }
+  .memory-card p {
+    font-style: italic;
+    color: var(--cream) !important;
+    font-size: 1.1rem !important;
+    line-height: 1.8 !important;
+    margin-bottom: 1rem !important;
+    position: relative;
+    z-index: 1;
+  }
+  .memory-card cite {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-style: normal;
+    font-family: 'Special Elite', monospace;
+  }
+
+  /* SAME TEAM SECTION */
+  .same-team {
+    background: var(--dark);
+    border-top: 1px solid rgba(200,118,26,0.15);
+  }
+  .same-team-banner {
+    background: linear-gradient(90deg, rgba(200,118,26,0.12) 0%, rgba(200,118,26,0.05) 50%, rgba(200,118,26,0.12) 100%);
+    border: 1px solid rgba(200,118,26,0.3);
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .same-team-banner .years-badge {
+    flex-shrink: 0;
+    width: 110px;
+    height: 110px;
+    border: 2px solid var(--amber);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .same-team-banner .years-badge .yr { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--amber); line-height: 1; }
+  .same-team-banner .years-badge .yr-label { font-family: 'Special Elite', monospace; font-size: 0.55rem; letter-spacing: 0.2em; color: #7a6a4a; text-transform: uppercase; margin-top: 4px; }
+  .same-team-banner p { color: #b8a882; line-height: 1.85; font-size: 1.05rem; }
+  .same-team-banner p strong { color: var(--cream); }
+
+  .credentials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  .cred-item {
+    border-left: 3px solid var(--amber);
+    padding: 1rem 1.5rem;
+    background: rgba(200,118,26,0.04);
+  }
+  .cred-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+  .cred-item p { font-size: 0.85rem; color: #7a6a4a; line-height: 1.6; }
+
+  /* WHAT WE NEED */
+  .what-we-need { background: var(--dark); border-top: 1px solid rgba(200,118,26,0.1); }
+  .section-label {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--cream);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .section-intro {
+    color: #9a8a6a;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 620px;
+    margin-bottom: 3.5rem;
+  }
+  .needs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .need-item {
+    border: 1px solid rgba(200,118,26,0.2);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .need-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--amber);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  .need-item:hover { border-color: rgba(200,118,26,0.5); background: rgba(200,118,26,0.05); }
+  .need-item:hover::after { transform: scaleX(1); }
+  .need-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+  .need-item h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--cream); margin-bottom: 0.5rem; }
+  .need-item p { color: #7a6a4a; font-size: 0.9rem; line-height: 1.7; }
+
+  /* SOCIAL COPY TOOLKIT */
+  .toolkit { background: #110d04; border-top: 1px solid rgba(200,118,26,0.15); }
+  .posts-grid { display: grid; gap: 1.5rem; }
+  .post-card { border: 1px solid rgba(200,118,26,0.2); padding: 1.8rem 2rem; position: relative; transition: border-color 0.25s; }
+  .post-card:hover { border-color: rgba(200,118,26,0.45); }
+  .post-platform {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .post-platform::before { content: ''; width: 20px; height: 1px; background: var(--amber); }
+  .post-body { color: #ccc0a0; line-height: 1.75; font-size: 0.97rem; margin-bottom: 1rem; white-space: pre-line; }
+  .post-hashtags { color: #6a8f6c; font-size: 0.88rem; font-style: italic; }
+  .copy-btn {
+    position: absolute;
+    top: 1.2rem; right: 1.2rem;
+    background: rgba(200,118,26,0.12);
+    border: 1px solid rgba(200,118,26,0.3);
+    color: var(--amber);
+    padding: 0.3rem 0.8rem;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(200,118,26,0.25); }
+  .copy-btn.copied { background: rgba(44,74,46,0.4); border-color: var(--forest); color: #6aaf6c; }
+
+  /* INTEREST FORM */
+  .interest-form {
+    background: linear-gradient(160deg, #1c1205 0%, #0e0a02 100%);
+    border-top: 1px solid rgba(200,118,26,0.2);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .form-fields { display: flex; flex-direction: column; gap: 1.2rem; }
+  .field-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field-group label {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .field-group input,
+  .field-group select,
+  .field-group textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,118,26,0.25);
+    color: var(--cream);
+    padding: 0.75rem 1rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .field-group input:focus,
+  .field-group select:focus,
+  .field-group textarea:focus { border-color: var(--amber); }
+  .field-group select option { background: #1a1208; }
+  .field-group textarea { resize: vertical; min-height: 90px; }
+
+  .checkbox-row { display: flex; align-items: flex-start; gap: 0.7rem; margin-top: 0.3rem; }
+  .checkbox-row input[type=checkbox] { margin-top: 4px; accent-color: var(--amber); }
+  .checkbox-row span { font-size: 0.88rem; color: #9a8a6a; line-height: 1.5; }
+
+  .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+
+  .form-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 1.2rem;
+    line-height: 1.3;
+  }
+  .form-info h3 em { color: var(--amber); font-style: italic; }
+  .tally-box {
+    background: rgba(200,118,26,0.08);
+    border: 1px solid rgba(200,118,26,0.25);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .tally-box p {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #7a6a4a;
+    margin-bottom: 0.5rem;
+  }
+  .tally-count { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--amber); line-height: 1; }
+  .tally-sub { font-size: 0.8rem !important; color: #5a4a2a !important; margin-top: 0.25rem !important; }
+
+  .submit-row { display: flex; gap: 1rem; margin-top: 0.8rem; flex-wrap: wrap; align-items: center; }
+  .submit-row .btn-primary { flex: 1; text-align: center; }
+  .form-note { font-size: 0.78rem; color: #5a4a2a; font-style: italic; }
+
+  /* CAMPAIGN PHASES */
+  .phases { background: var(--dark); }
+  .phases-list { display: grid; gap: 0; }
+  .phase {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(200,118,26,0.1);
+    align-items: start;
+  }
+  .phase:last-child { border-bottom: none; }
+  .phase-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(200,118,26,0.35);
+    line-height: 1;
+    padding-top: 0.2rem;
+  }
+  .phase h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--cream); margin-bottom: 0.5rem; }
+  .phase p { color: #8a7a5a; font-size: 0.93rem; line-height: 1.75; }
+  .phase-tag {
+    display: inline-block;
+    background: rgba(200,118,26,0.12);
+    color: var(--amber);
+    font-family: 'Special Elite', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    margin-top: 0.5rem;
+  }
+
+  /* VOLUNTEER PAGE */
+  .volunteer-hero {
+    background: linear-gradient(135deg, #0d1a0e 0%, #1A1208 100%);
+    padding: 8rem 2rem 5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(74,138,76,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .volunteer-hero::before {
+    content: '🌿';
+    font-size: 18rem;
+    opacity: 0.04;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .volunteer-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1.1;
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .volunteer-hero h1 .accent { color: #6aaf6c; }
+  .volunteer-hero p {
+    font-style: italic;
+    color: #9a9a7a;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .vol-badge {
+    display: inline-block;
+    border: 2px solid #4a8a4c;
+    color: #6aaf6c;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .volunteer-roles {
+    background: #0f180f;
+    padding: 5rem 2rem;
+    border-bottom: 1px solid rgba(74,138,76,0.15);
+  }
+  .vol-section-label {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #6aaf6c;
+    margin-bottom: 1rem;
+  }
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .role-card {
+    border: 1px solid rgba(74,138,76,0.25);
+    padding: 1.8rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .role-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: #4a8a4c;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  .role-card:hover { border-color: rgba(74,138,76,0.5); background: rgba(74,138,76,0.05); }
+  .role-card:hover::after { transform: scaleX(1); }
+  .role-card.selected { border-color: #6aaf6c; background: rgba(74,138,76,0.1); }
+  .role-card.selected::after { transform: scaleX(1); }
+  .role-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+  .role-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.4rem; }
+  .role-card p { font-size: 0.85rem; color: #6a7a5a; line-height: 1.65; margin-bottom: 0.8rem; }
+  .role-time { font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.15em; color: #4a8a4c; text-transform: uppercase; }
+  .role-check {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 22px; height: 22px;
+    border: 1.5px solid rgba(74,138,76,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: transparent;
+    transition: all 0.2s;
+  }
+  .role-card.selected .role-check { background: #4a8a4c; border-color: #4a8a4c; color: white; }
+
+  /* VOLUNTEER FORM */
+  .volunteer-form {
+    background: linear-gradient(160deg, #0d150e 0%, #0a0f05 100%);
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(74,138,76,0.15);
+  }
+  .vol-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .vol-form-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 900;
+    color: var(--cream);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .vol-form-info h2 em { color: #6aaf6c; font-style: italic; }
+  .vol-form-info p { color: #8a8a6a; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; }
+
+  .vol-tally-box {
+    background: rgba(74,138,76,0.08);
+    border: 1px solid rgba(74,138,76,0.25);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .vol-tally-box p {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #5a6a4a;
+    margin-bottom: 0.5rem;
+  }
+  .vol-tally-count { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: #6aaf6c; line-height: 1; }
+
+  .vol-field-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .vol-field-group label {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #6aaf6c;
+  }
+  .vol-field-group input,
+  .vol-field-group select,
+  .vol-field-group textarea {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(74,138,76,0.25);
+    color: var(--cream);
+    padding: 0.75rem 1rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .vol-field-group input:focus,
+  .vol-field-group select:focus,
+  .vol-field-group textarea:focus { border-color: #6aaf6c; }
+  .vol-field-group select option { background: #0d150e; }
+  .vol-field-group textarea { resize: vertical; min-height: 80px; }
+
+  .vol-checkbox-row { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.6rem; }
+  .vol-checkbox-row input[type=checkbox] { margin-top: 4px; accent-color: #6aaf6c; }
+  .vol-checkbox-row span { font-size: 0.88rem; color: #9a9a6a; line-height: 1.5; }
+
+  .selected-roles-display {
+    background: rgba(74,138,76,0.08);
+    border: 1px solid rgba(74,138,76,0.2);
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+    color: #6aaf6c;
+    font-style: italic;
+    margin-bottom: 1.2rem;
+    min-height: 44px;
+  }
+
+  .vol-submit-btn {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: #2C4A2E;
+    border: 2px solid #4a8a4c;
+    color: var(--cream);
+    font-family: 'Special Elite', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-top: 0.5rem;
+  }
+  .vol-submit-btn:hover { background: #3a6a3c; transform: translateY(-2px); }
+
+  .vol-success-msg {
+    display: none;
+    background: rgba(44,74,46,0.25);
+    border: 1px solid rgba(106,175,108,0.4);
+    color: #8ad48c;
+    padding: 1rem 1.5rem;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0a0702;
+    border-top: 1px solid rgba(200,118,26,0.15);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--amber); margin-bottom: 0.5rem; }
+  footer p { color: #4a3a1a; font-size: 0.85rem; margin-top: 0.5rem; }
+
+  /* SUCCESS STATE */
+  .success-msg {
+    display: none;
+    background: rgba(44,74,46,0.2);
+    border: 1px solid rgba(106,175,108,0.4);
+    color: #8ad48c;
+    padding: 1rem 1.5rem;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .story-grid, .form-grid, .vol-form-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .phase { grid-template-columns: 60px 1fr; gap: 1rem; }
+    .phase-num { font-size: 2.5rem; }
+    .same-team-banner { flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
+    .nav-tab { padding: 0.8rem 0.9rem; font-size: 0.6rem; letter-spacing: 0.12em; }
+    .checkbox-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <button class="nav-tab active" onclick="showPage('main')">🍺 The Festival</button>
+  <button class="nav-tab" onclick="showPage('volunteer')">🤝 Volunteer</button>
+</nav>
+
+<!-- ===================== MAIN PAGE ===================== -->
+<div class="page active" id="page-main">
+
+<!-- HERO -->
+<section class="hero">
+  <span class="leaf">🍂</span>
+  <span class="leaf">🍁</span>
+  <span class="leaf">🍺</span>
+  <span class="leaf">🍂</span>
+  <span class="leaf">🎶</span>
+  <div class="hero-year">2013</div>
+  <div class="badge">Guilford, Connecticut · Edelweiss Lodge</div>
+  <h1 class="hero-title">Bring Back the<br><span class="accent">Shoreline Oktoberfest</span></h1>
+  <p class="hero-sub">It happened once — by the water, under the autumn sky, with cold beer, good music, and this whole community together. The same people who built it in 2013 are ready to build it again.</p>
+  <div class="hero-cta">
+    <a href="#pledge" class="btn btn-primary" onclick="showPage('main'); setTimeout(()=>document.getElementById('pledge').scrollIntoView({behavior:'smooth'}),50)">Sign the Interest Pledge</a>
+    <button class="btn btn-green" onclick="showPage('volunteer')">Volunteer Sign-Up</button>
+    <a href="#toolkit" class="btn btn-outline" onclick="setTimeout(()=>document.getElementById('toolkit').scrollIntoView({behavior:'smooth'}),50)">Share the Campaign</a>
+  </div>
+</section>
+
+<div class="divider" style="padding:1.5rem 2rem;"><span class="divider-icon">🌊</span></div>
+
+<!-- STORY -->
+<section class="story">
+  <div class="container">
+    <div class="story-grid">
+      <div>
+        <p class="section-label">The Memory</p>
+        <h2>It was <em>something special</em> on the Guilford shore</h2>
+        <p>Back in the fall of 2013, Guilford came alive with the sounds, smells, and spirit of a classic Oktoberfest — right along the Connecticut shoreline. Craft beer, live music, local vendors, and the warmth of a town coming together.</p>
+        <p>It was the kind of event that feels like Guilford at its best. And then it was gone. But the memory stayed.</p>
+        <p>This campaign is about finding out: <strong style="color:var(--cream);">are enough of us ready to bring it back?</strong></p>
+      </div>
+      <div class="memory-card">
+        <p>The smell of bratwurst, the sound of a polka band drifting off the water, families and neighbors all in one place on a crisp October afternoon. That was Guilford at its absolute best.</p>
+        <cite>— A 2013 Attendee</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="padding:1.5rem 2rem;"><span class="divider-icon">🏅</span></div>
+
+<!-- SAME TEAM SECTION -->
+<section class="same-team">
+  <div class="container">
+    <p class="section-label">The Team Behind It</p>
+    <h2 class="section-title">The Same People.<br>The Same Passion.</h2>
+    <p class="section-intro">This isn't a new idea from people who heard about a festival. This is the original team — the people who actually built the 2013 Oktoberfest — coming back to do it again, better than ever.</p>
+
+    <div class="same-team-banner">
+      <div class="years-badge">
+        <span class="yr">10+</span>
+        <span class="yr-label">Years of<br>Experience</span>
+      </div>
+      <p>The <strong>Edelweiss Lodge of the Hermann Sons of Connecticut</strong> organized and ran the original 2013 Guilford Shoreline Oktoberfest from the ground up. We booked the venue, coordinated the vendors, brought in the entertainment, and poured the beer. We know exactly what it takes — because we've already done it. Now, as a fully registered <strong>501(c) charitable organization</strong>, we're coming back with even stronger community ties, better planning, and a mission that goes beyond a great party: every dollar raised goes to support our local VFW.</p>
+    </div>
+
+    <div class="credentials-grid">
+      <div class="cred-item">
+        <h4>✅ Proven Event Organizers</h4>
+        <p>We ran the 2013 festival successfully — same logistics team, same commitment to quality, zero guesswork on what works.</p>
+      </div>
+      <div class="cred-item">
+        <h4>🏛️ Established 501(c) Nonprofit</h4>
+        <p>The Edelweiss Lodge is a registered charitable organization. Your donation is accountable, transparent, and mission-driven.</p>
+      </div>
+      <div class="cred-item">
+        <h4>🤝 Deep Community Roots</h4>
+        <p>Our Lodge has been part of Connecticut's fabric for generations — we know this community, and this community knows us.</p>
+      </div>
+      <div class="cred-item">
+        <h4>🎯 Clear Charitable Goal</h4>
+        <p>Net proceeds from the first festival go directly to the local VFW, supporting veterans who served this country.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="padding:1.5rem 2rem;"><span class="divider-icon">🍺</span></div>
+
+<!-- WHAT WE NEED -->
+<section class="what-we-need">
+  <div class="container">
+    <p class="section-label">What It Takes</p>
+    <h2 class="section-title">This Festival Needs Three Things</h2>
+    <p class="section-intro">A shoreline festival doesn't happen by accident. Before we can book a venue or pour a pint, we need to know: <em>is the community behind this?</em></p>
+    <div class="needs-grid">
+      <div class="need-item">
+        <span class="need-icon">🙋</span>
+        <h3>Community Interest</h3>
+        <p>We need to show organizers and town officials that Guilford wants this. Every signature proves demand and builds the case.</p>
+      </div>
+      <div class="need-item">
+        <span class="need-icon">💰</span>
+        <h3>Funding Commitments</h3>
+        <p>Venue permits, insurance, equipment, and entertainment cost money. Early pledges let us approach sponsors with real numbers.</p>
+      </div>
+      <div class="need-item">
+        <span class="need-icon">🤝</span>
+        <h3>Volunteer Hands</h3>
+        <p>Grassroots festivals run on local muscle. <button onclick="showPage('volunteer')" style="background:none;border:none;color:var(--amber);cursor:pointer;font-family:inherit;font-size:inherit;text-decoration:underline;padding:0;">Sign up to volunteer →</button></p>
+      </div>
+      <div class="need-item">
+        <span class="need-icon">📢</span>
+        <h3>Word of Mouth</h3>
+        <p>Share this with every Guilford neighbor, former resident, or Connecticut shoreline lover you know. That's how this grows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL TOOLKIT -->
+<section class="toolkit" id="toolkit">
+  <div class="container">
+    <p class="section-label">Social Media Toolkit</p>
+    <h2 class="section-title">Ready-to-Post Copy</h2>
+    <p class="section-intro">Copy these posts and share them on your own social channels. Every share reaches new potential attendees and donors.</p>
+    <div class="posts-grid">
+
+      <div class="post-card">
+        <span class="post-platform">Facebook · Awareness Post</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+        <div class="post-body">Remember Guilford's Shoreline Oktoberfest back in 2013? Cold beer, live music, and the whole town together by the water on a crisp fall day.
+
+The same group that organized it in 2013 — the Edelweiss Lodge of the Hermann Sons of Connecticut — wants to bring it back. And this time, proceeds go to our local VFW.
+
+We need to show there's real community support. Take 30 seconds to sign our free interest pledge:
+
+👉 [LINK]
+
+If you were there in 2013, tag someone who remembers it. Let's make this happen.</div>
+        <div class="post-hashtags">#GuilfordCT #ShorelineOktoberfest #BringItBack #ConnecticutEvents #VFW #EdelweissLodge</div>
+      </div>
+
+      <div class="post-card">
+        <span class="post-platform">Instagram · Short Hook</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+        <div class="post-body">🍺 Guilford had an Oktoberfest by the water in 2013 and it was absolutely magical.
+
+The same team that built it is back — and this time, every dollar raised goes to our local VFW.
+
+Tap the link in bio to sign our free interest pledge. Takes 30 seconds, costs nothing.
+
+Autumn on the CT shoreline deserves a real festival. Let's bring it back. 🍂</div>
+        <div class="post-hashtags">#GuilfordCT #Oktoberfest #CTShoreline #ConnecticutFall #VFW #EdelweissLodge #HermannSons</div>
+      </div>
+
+      <div class="post-card">
+        <span class="post-platform">X / Twitter · Quick Engage</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+        <div class="post-body">The team behind Guilford CT's 2013 Shoreline Oktoberfest wants to bring it back — and donate proceeds to the local VFW.
+
+Sign the free interest pledge if you want to see this happen → [LINK]
+
+RT if you love fall on the CT shoreline 🍂🍺</div>
+        <div class="post-hashtags">#GuilfordCT #CTEvents #Oktoberfest #VFW</div>
+      </div>
+
+      <div class="post-card">
+        <span class="post-platform">Nextdoor · Neighborhood Post</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+        <div class="post-body">Hey Guilford neighbors 👋
+
+The Edelweiss Lodge of the Hermann Sons of Connecticut — the same group that organized the 2013 Shoreline Oktoberfest — is looking to bring the festival back, with proceeds going to our local VFW.
+
+Before we approach vendors, sponsors, or the town, we want to gauge real interest. There's a quick free pledge form at [LINK] — no commitment, just your name.
+
+We're also looking for volunteers! If you'd be interested in helping out at the festival, there's a volunteer sign-up page at the same link.
+
+Thanks, Guilford. Let's make something happen this fall.</div>
+        <div class="post-hashtags">#GuilfordCT #LocalEvents #Oktoberfest #VFW</div>
+      </div>
+
+      <div class="post-card">
+        <span class="post-platform">Email · To Friends &amp; Family</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+        <div class="post-body">Subject: Help Bring Back Guilford's Shoreline Oktoberfest — Benefiting the VFW
+
+Hey,
+
+Quick note — the Edelweiss Lodge of the Hermann Sons of Connecticut (the same group that organized the original 2013 Guilford Shoreline Oktoberfest) is trying to revive the festival, with net proceeds going to the local VFW.
+
+We're gauging community interest with a simple free pledge — takes less than a minute. Here's the link: [LINK]
+
+There's also a volunteer sign-up page if you'd be interested in helping out at the event.
+
+If you know anyone from Guilford or the CT shoreline who might want to attend or volunteer, please pass this along!
+
+Thanks,
+[Your name]</div>
+        <div class="post-hashtags"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INTEREST PLEDGE FORM -->
+<section class="interest-form" id="pledge">
+  <div class="container">
+    <div class="form-grid">
+      <div class="form-info">
+        <p class="section-label">Sign the Pledge</p>
+        <h3>Tell us you're <em>in</em></h3>
+        <p style="color:#9a8a6a;line-height:1.8;font-size:0.95rem;">This isn't a ticket purchase or a legal commitment — it's a signal. Your name tells organizers, sponsors, and the town of Guilford that there's real community appetite for this festival.</p>
+        <div class="tally-box">
+          <p>Interest Pledges So Far</p>
+          <div class="tally-count" id="counter">0</div>
+          <p class="tally-sub">Be among the first to sign</p>
+        </div>
+        <div style="margin-top:1.5rem; padding:1.2rem; border:1px solid rgba(74,138,76,0.25); background:rgba(44,74,46,0.08);">
+          <p style="font-family:'Special Elite',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#6aaf6c;margin-bottom:0.5rem;">Want to do more?</p>
+          <p style="font-size:0.88rem;color:#7a8a6a;line-height:1.6;margin-bottom:0.8rem;">Join our volunteer crew — we need help before, during, and after the festival.</p>
+          <button onclick="showPage('volunteer')" class="btn btn-green" style="padding:0.6rem 1.4rem;font-size:0.75rem;">Sign Up to Volunteer →</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="form-fields" id="pledgeForm">
+          <div class="field-group">
+            <label>Your Name</label>
+            <input type="text" id="fname" placeholder="First & Last Name" />
+          </div>
+          <div class="field-group">
+            <label>Email Address</label>
+            <input type="email" id="femail" placeholder="you@example.com" />
+          </div>
+          <div class="field-group">
+            <label>Town / Neighborhood</label>
+            <input type="text" id="ftown" placeholder="Guilford, Madison, etc." />
+          </div>
+          <div class="field-group">
+            <label>Were you at the 2013 Oktoberfest?</label>
+            <select id="fattended">
+              <option value="">— Select —</option>
+              <option>Yes, I was there!</option>
+              <option>No, but I wish I had been</option>
+              <option>Not sure / Don't remember</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Would you consider donating to help fund it?</label>
+            <select id="fdonate">
+              <option value="">— Select —</option>
+              <option>Yes — $10–$25</option>
+              <option>Yes — $25–$50</option>
+              <option>Yes — $50–$100</option>
+              <option>Yes — $100+</option>
+              <option>Not financially, but I'd volunteer</option>
+              <option>Just signing the interest pledge for now</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Anything else you'd love to see at the festival?</label>
+            <textarea id="fnotes" placeholder="Live bands, specific food vendors, activities for kids, local breweries..."></textarea>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="fnotify" />
+            <span>Keep me posted via email when updates are announced about the festival</span>
+          </div>
+          <div class="submit-row">
+            <button class="btn btn-primary" onclick="submitPledge()">Count Me In →</button>
+          </div>
+          <div class="success-msg" id="successMsg">
+            ✓ &nbsp; You're on the list! Thank you for supporting the Guilford Shoreline Oktoberfest revival. Share the campaign to help us reach more neighbors.
+          </div>
+          <p class="form-note">No spam, ever. Your email is only used for festival updates if you opt in above.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="padding:1.5rem 2rem;"><span class="divider-icon">🍁</span></div>
+
+<!-- CAMPAIGN PHASES -->
+<section class="phases">
+  <div class="container">
+    <p class="section-label">The Roadmap</p>
+    <h2 class="section-title">How This Comes Together</h2>
+    <p class="section-intro" style="margin-bottom:2.5rem;">A grassroots campaign builds in stages. Here's where we're going.</p>
+    <div class="phases-list">
+      <div class="phase">
+        <div class="phase-num">01</div>
+        <div>
+          <h3>Gauge Community Interest</h3>
+          <p>Collect interest pledges and volunteer sign-ups through this page and social media. Our goal: 200 signatures that show real, local demand.</p>
+          <span class="phase-tag">📍 We Are Here</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">02</div>
+        <div>
+          <h3>Approach Local Businesses &amp; Sponsors</h3>
+          <p>Armed with pledge numbers and donation data, approach Guilford-area businesses, breweries, and restaurants about sponsorship.</p>
+          <span class="phase-tag">🎯 Next Step</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">03</div>
+        <div>
+          <h3>Launch GoFundMe Campaign</h3>
+          <p>Open our formal GoFundMe with a $50,000 goal — covering permits, venue, entertainment, and logistics — so the festival's profits go entirely to the VFW.</p>
+          <span class="phase-tag">💰 Funding Phase</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">04</div>
+        <div>
+          <h3>Secure the Venue &amp; Date</h3>
+          <p>Work with the Town of Guilford to lock in a waterfront location and an October date. Build out the volunteer team from our sign-up list.</p>
+          <span class="phase-tag">📅 Logistics</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">05</div>
+        <div>
+          <h3>Guilford Shoreline Oktoberfest Returns 🍺</h3>
+          <p>Cold beer, live music, local food, autumn air, the CT shoreline — and a donation to our local VFW. If the community shows up now, the festival shows up in October.</p>
+          <span class="phase-tag">🎉 The Goal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Guilford Shoreline Oktoberfest</div>
+  <p>Organized by the Edelweiss Lodge of the Hermann Sons of Connecticut · 501(c) Nonprofit</p>
+  <p style="margin-top:0.5rem;">Benefiting the Local VFW · Guilford, Connecticut</p>
+  <p style="margin-top:1.5rem;">Questions? Reach out at <span style="color:var(--amber);">[your email here]</span></p>
+</footer>
+
+</div><!-- end page-main -->
+
+<!-- ===================== VOLUNTEER PAGE ===================== -->
+<div class="page" id="page-volunteer">
+
+<section class="volunteer-hero">
+  <div class="vol-badge">Edelweiss Lodge · Hermann Sons of CT</div>
+  <h1>Join the<br><span class="accent">Volunteer Crew</span></h1>
+  <p>The Guilford Shoreline Oktoberfest runs on community spirit — and that means people like you. Tell us how you'd like to help and we'll be in touch when it's go time.</p>
+  <button onclick="document.getElementById('vol-form-anchor').scrollIntoView({behavior:'smooth'})" class="btn btn-green">Sign Me Up</button>
+</section>
+
+<!-- ROLES -->
+<section class="volunteer-roles">
+  <div class="container">
+    <p class="vol-section-label">Volunteer Roles</p>
+    <h2 class="section-title" style="color:var(--cream);">Where We Need Help</h2>
+    <p class="section-intro">Click the roles that interest you — your selections will carry into the sign-up form below.</p>
+
+    <div class="roles-grid" id="rolesGrid">
+
+      <div class="role-card" onclick="toggleRole(this, 'Setup & Breakdown Crew')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">🏗️</span>
+        <h3>Setup & Breakdown Crew</h3>
+        <p>Help assemble tents, tables, signage, and equipment before the festival and pack everything down afterward.</p>
+        <span class="role-time">⏰ Day before + day after</span>
+      </div>
+
+      <div class="role-card" onclick="toggleRole(this, 'Beer Garden Staff')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">🍺</span>
+        <h3>Beer Garden Staff</h3>
+        <p>Pour steins, manage the beer garden, check wristbands, and keep things flowing smoothly at the bar areas.</p>
+        <span class="role-time">⏰ Day of festival · must be 21+</span>
+      </div>
+
+      <div class="role-card" onclick="toggleRole(this, 'Food Vendor Liaison')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">🌭</span>
+        <h3>Food Vendor Liaison</h3>
+        <p>Coordinate with food vendors on arrival, placement, and logistics throughout the event day.</p>
+        <span class="role-time">⏰ Day of festival</span>
+      </div>
+
+      <div class="role-card" onclick="toggleRole(this, 'Ticket & Gate Staff')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">🎟️</span>
+        <h3>Ticket & Gate Staff</h3>
+        <p>Manage festival entry — scan tickets, hand out wristbands, and welcome guests at the entrance.</p>
+        <span class="role-time">⏰ Day of festival</span>
+      </div>
+
+      <div class="role-card" onclick="toggleRole(this, 'Entertainment Coordinator')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">🎶</span>
+        <h3>Entertainment Coordinator</h3>
+        <p>Help coordinate with bands and performers — backstage logistics, scheduling, and stage setup support.</p>
+        <span class="role-time">⏰ Day of festival</span>
+      </div>
+
+      <div class="role-card" onclick="toggleRole(this, 'Kids & Family Activities')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">🎈</span>
+        <h3>Kids & Family Activities</h3>
+        <p>Run games, activities, and the family-friendly area of the festival. Great for those with kids of their own!</p>
+        <span class="role-time">⏰ Day of festival</span>
+      </div>
+
+      <div class="role-card" onclick="toggleRole(this, 'VFW Donation & Awareness Table')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">🎖️</span>
+        <h3>VFW Donation & Awareness Table</h3>
+        <p>Staff our VFW awareness table — share information about how festival proceeds benefit local veterans.</p>
+        <span class="role-time">⏰ Day of festival</span>
+      </div>
+
+      <div class="role-card" onclick="toggleRole(this, 'Social Media & Photography')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">📸</span>
+        <h3>Social Media & Photography</h3>
+        <p>Capture the day and post live coverage to help spread the word during and after the festival.</p>
+        <span class="role-time">⏰ Day of festival</span>
+      </div>
+
+      <div class="role-card" onclick="toggleRole(this, 'General Volunteer / Wherever Needed')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">🙋</span>
+        <h3>General Volunteer</h3>
+        <p>Happy to help wherever the need is greatest on the day. The backbone of any great community festival.</p>
+        <span class="role-time">⏰ Flexible</span>
+      </div>
+
+      <div class="role-card" onclick="toggleRole(this, 'Pre-Event Planning & Outreach')">
+        <span class="role-check">✓</span>
+        <span class="role-icon">📋</span>
+        <h3>Pre-Event Planning & Outreach</h3>
+        <p>Help with logistics, vendor outreach, or community promotion in the weeks and months before the event.</p>
+        <span class="role-time">⏰ Weeks before the festival</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER FORM -->
+<section class="volunteer-form" id="vol-form-anchor">
+  <div class="container">
+    <div class="vol-form-grid">
+      <div class="vol-form-info">
+        <p class="vol-section-label">Sign Up</p>
+        <h2>Ready to <em>roll up your sleeves?</em></h2>
+        <p>Fill out the form and we'll reach out when volunteer scheduling begins. The more detail you give us about your availability and skills, the better we can match you to a role you'll love.</p>
+        <p>Every volunteer who signs up will receive a complimentary festival wristband as our thank-you for making this happen.</p>
+        <div class="vol-tally-box">
+          <p>Volunteers Signed Up</p>
+          <div class="vol-tally-count" id="vol-counter">0</div>
+          <p style="font-family:'Special Elite',monospace;font-size:0.7rem;letter-spacing:0.15em;color:#3a5a3a;margin-top:4px;">BE AMONG THE FIRST</p>
+        </div>
+        <div style="margin-top:1.5rem;padding:1.2rem;border:1px solid rgba(200,118,26,0.2);background:rgba(200,118,26,0.04);">
+          <p style="font-family:'Special Elite',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:0.5rem;">Not ready to volunteer?</p>
+          <p style="font-size:0.88rem;color:#7a6a4a;line-height:1.6;margin-bottom:0.8rem;">Sign the community interest pledge instead — it only takes 30 seconds.</p>
+          <button onclick="showPage('main'); setTimeout(()=>document.getElementById('pledge').scrollIntoView({behavior:'smooth'}),50)" class="btn btn-outline" style="padding:0.6rem 1.4rem;font-size:0.75rem;">Sign the Pledge →</button>
+        </div>
+      </div>
+
+      <div>
+        <div id="volForm">
+          <div class="vol-field-group">
+            <label>Your Name *</label>
+            <input type="text" id="vname" placeholder="First & Last Name" />
+          </div>
+          <div class="vol-field-group">
+            <label>Email Address *</label>
+            <input type="email" id="vemail" placeholder="you@example.com" />
+          </div>
+          <div class="vol-field-group">
+            <label>Phone Number</label>
+            <input type="tel" id="vphone" placeholder="(203) 555-0100" />
+          </div>
+          <div class="vol-field-group">
+            <label>Town / Neighborhood</label>
+            <input type="text" id="vtown" placeholder="Guilford, Madison, etc." />
+          </div>
+          <div class="vol-field-group">
+            <label>Age Range</label>
+            <select id="vage">
+              <option value="">— Select —</option>
+              <option>18–25</option>
+              <option>26–35</option>
+              <option>36–50</option>
+              <option>51–65</option>
+              <option>65+</option>
+            </select>
+          </div>
+          <div class="vol-field-group">
+            <label>Roles you selected above</label>
+            <div class="selected-roles-display" id="selectedRolesDisplay">
+              <em style="color:#5a6a4a;">No roles selected yet — click the cards above to choose</em>
+            </div>
+          </div>
+          <div class="vol-field-group">
+            <label>Availability</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Day before (setup)" /><span>Day before (setup)</span></div>
+              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Morning of festival" /><span>Morning of festival</span></div>
+              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Afternoon of festival" /><span>Afternoon of festival</span></div>
+              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Evening of festival" /><span>Evening of festival</span></div>
+              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Day after (cleanup)" /><span>Day after (cleanup)</span></div>
+              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Pre-event weeks" /><span>Weeks before event</span></div>
+            </div>
+          </div>
+          <div class="vol-field-group">
+            <label>Any relevant skills or experience?</label>
+            <textarea id="vskills" placeholder="e.g. bartending, event planning, photography, first aid, bilingual, etc."></textarea>
+          </div>
+          <div class="vol-field-group">
+            <label>T-shirt size (for volunteer shirts)</label>
+            <select id="vsize">
+              <option value="">— Select —</option>
+              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+            </select>
+          </div>
+          <div class="vol-checkbox-row" style="margin-bottom:1rem;">
+            <input type="checkbox" id="v21" />
+            <span>I am 21 years of age or older (required for beer garden roles)</span>
+          </div>
+          <div class="vol-checkbox-row" style="margin-bottom:1.2rem;">
+            <input type="checkbox" id="vnotify" />
+            <span>Keep me updated by email as volunteer scheduling gets underway</span>
+          </div>
+          <button class="vol-submit-btn" onclick="submitVolunteer()">Sign Me Up to Volunteer →</button>
+          <div class="vol-success-msg" id="volSuccessMsg">
+            ✓ &nbsp; You're on the volunteer list! We'll be in touch as the festival takes shape. Thank you for helping make this happen.
+          </div>
+          <p class="form-note" style="color:#3a5a3a;margin-top:0.8rem;">No spam. Your info is only used to coordinate volunteer scheduling for the Guilford Shoreline Oktoberfest.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Guilford Shoreline Oktoberfest</div>
+  <p>Organized by the Edelweiss Lodge of the Hermann Sons of Connecticut · 501(c) Nonprofit</p>
+  <p style="margin-top:0.5rem;">Benefiting the Local VFW · Guilford, Connecticut</p>
+  <p style="margin-top:1.5rem;">Questions about volunteering? Reach out at <span style="color:var(--amber);">[your email here]</span></p>
+</footer>
+
+</div><!-- end page-volunteer -->
+
+<script>
+  // PAGE NAVIGATION
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.querySelectorAll('.nav-tab')[name === 'main' ? 0 : 1].classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // PLEDGE COUNTER
+  let count = parseInt(localStorage.getItem('oktofest_count') || '0');
+  const counterEl = document.getElementById('counter');
+  counterEl.textContent = count;
+
+  function animateCounter(el, from, to) {
+    const duration = 1200;
+    const start = performance.now();
+    function update(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(update);
+      else el.textContent = to;
+    }
+    requestAnimationFrame(update);
+  }
+
+  function submitPledge() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    if (!name || !email) { alert('Please enter your name and email to sign the pledge.'); return; }
+    const newCount = count + 1;
+    localStorage.setItem('oktofest_count', newCount);
+    animateCounter(counterEl, count, newCount);
+    count = newCount;
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.submit-row').style.display = 'none';
+    document.querySelector('.form-note').style.display = 'none';
+  }
+
+  // VOLUNTEER COUNTER
+  let volCount = parseInt(localStorage.getItem('oktofest_vol_count') || '0');
+  const volCounterEl = document.getElementById('vol-counter');
+  volCounterEl.textContent = volCount;
+
+  // ROLE SELECTION
+  let selectedRoles = [];
+
+  function toggleRole(card, roleName) {
+    card.classList.toggle('selected');
+    if (card.classList.contains('selected')) {
+      selectedRoles.push(roleName);
+    } else {
+      selectedRoles = selectedRoles.filter(r => r !== roleName);
+    }
+    const display = document.getElementById('selectedRolesDisplay');
+    if (selectedRoles.length === 0) {
+      display.innerHTML = '<em style="color:#5a6a4a;">No roles selected yet — click the cards above to choose</em>';
+    } else {
+      display.innerHTML = selectedRoles.map(r => '<span style="display:inline-block;background:rgba(74,138,76,0.15);border:1px solid rgba(74,138,76,0.3);color:#6aaf6c;font-size:0.78rem;padding:2px 8px;margin:2px 3px 2px 0;font-family:\'Special Elite\',monospace;">'+r+'</span>').join('');
+    }
+  }
+
+  function submitVolunteer() {
+    const name = document.getElementById('vname').value.trim();
+    const email = document.getElementById('vemail').value.trim();
+    if (!name || !email) { alert('Please enter your name and email to sign up.'); return; }
+    const newVol = volCount + 1;
+    localStorage.setItem('oktofest_vol_count', newVol);
+    animateCounter(volCounterEl, volCount, newVol);
+    volCount = newVol;
+    document.getElementById('volSuccessMsg').style.display = 'block';
+    document.querySelector('.vol-submit-btn').style.display = 'none';
+  }
+
+  // COPY POSTS
+  function copyPost(btn) {
+    const card = btn.closest('.post-card');
+    const body = card.querySelector('.post-body').textContent.trim();
+    const hashtags = card.querySelector('.post-hashtags').textContent.trim();
+    const full = body + (hashtags ? '\n\n' + hashtags : '');
+    navigator.clipboard.writeText(full).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  // SCROLL FADE-IN
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.need-item, .post-card, .phase, .role-card, .cred-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
