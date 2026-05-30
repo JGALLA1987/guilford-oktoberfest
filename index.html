@@ -1368,16 +1368,41 @@ Thanks,
   }
 
   function submitPledge() {
-    const name = document.getElementById('fname').value.trim();
-    const email = document.getElementById('femail').value.trim();
-    if (!name || !email) { alert('Please enter your name and email to sign the pledge.'); return; }
-    const newCount = count + 1;
-    localStorage.setItem('oktofest_count', newCount);
-    animateCounter(counterEl, count, newCount);
-    count = newCount;
-    document.getElementById('successMsg').style.display = 'block';
-    document.querySelector('.submit-row').style.display = 'none';
-    document.querySelector('.form-note').style.display = 'none';
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  if (!name || !email) {
+    alert('Please enter your name and email to sign the pledge.');
+    return;
+  }
+
+  const town = document.getElementById('ftown').value.trim();
+  const attended = document.getElementById('fattended').value;
+  const donate = document.getElementById('fdonate').value;
+  const notes = document.getElementById('fnotes').value.trim();
+
+  // Replace entry.133104693 with YOUR real entry IDs from Step 3
+  const baseUrl = 'https://docs.google.com/forms/d/e/YOUR-FORM-ID/viewform';
+  const params = new URLSearchParams({
+    'entry.1346076868': name,       // ← replace 111111 with your Name entry ID
+    'entry.133104693': email,      // ← replace 222222 with your Email entry ID
+    'entry.570994845': town,
+    'entry.843282456': attended,
+    'entry.578755876': donate,
+    'entry.281715906': notes,
+  });
+
+  window.open(baseUrl + '?' + params.toString(), '_blank');
+
+  // Show thank you message on your site
+  document.getElementById('successMsg').style.display = 'block';
+  document.querySelector('.submit-row').style.display = 'none';
+
+  // Update counter
+  const newCount = count + 1;
+  localStorage.setItem('oktofest_count', newCount);
+  animateCounter(counterEl, count, newCount);
+  count = newCount;
+}
   }
 
   // VOLUNTEER COUNTER
@@ -1403,17 +1428,105 @@ Thanks,
     }
   }
 
-  function submitVolunteer() {
-    const name = document.getElementById('vname').value.trim();
-    const email = document.getElementById('vemail').value.trim();
-    if (!name || !email) { alert('Please enter your name and email to sign up.'); return; }
-    const newVol = volCount + 1;
-    localStorage.setItem('oktofest_vol_count', newVol);
-    animateCounter(volCounterEl, volCount, newVol);
-    volCount = newVol;
-    document.getElementById('volSuccessMsg').style.display = 'block';
-    document.querySelector('.vol-submit-btn').style.display = 'none';
+// ─────────────────────────────────────────
+// VOLUNTEER FORM SUBMIT
+// ─────────────────────────────────────────
+function submitVolunteer() {
+  const name   = document.getElementById('vname').value.trim();
+  const email  = document.getElementById('vemail').value.trim();
+  const phone  = document.getElementById('vphone').value.trim();
+  const town   = document.getElementById('vtown').value.trim();
+  const age    = document.getElementById('vage').value;
+  const skills = document.getElementById('vskills').value.trim();
+  const size   = document.getElementById('vsize').value;
+  const is21   = document.getElementById('v21').checked ? 'Yes – I am 21 or older' : 'No';
+  const notify = document.getElementById('vnotify').checked ? 'Yes' : 'No';
+
+  // Collect availability checkboxes
+  const availChecked = [...document.querySelectorAll('.avail:checked')]
+    .map(cb => cb.value)
+    .join(', ');
+
+  // Collect selected roles
+  const rolesText = selectedRoles.length > 0
+    ? selectedRoles.join(', ')
+    : 'No specific role selected';
+
+  // Validate required fields
+  let valid = true;
+  const vNameEl  = document.getElementById('vname');
+  const vEmailEl = document.getElementById('vemail');
+
+  // Reset borders
+  [vNameEl, vEmailEl].forEach(el => {
+    el.style.borderColor = 'rgba(74,138,76,0.25)';
+    el.style.background  = 'rgba(255,255,255,0.03)';
+  });
+
+  if (!name) {
+    vNameEl.style.borderColor = '#9B3A1A';
+    vNameEl.style.background  = 'rgba(155,58,26,0.08)';
+    valid = false;
   }
+  if (!email || !email.includes('@')) {
+    vEmailEl.style.borderColor = '#9B3A1A';
+    vEmailEl.style.background  = 'rgba(155,58,26,0.08)';
+    valid = false;
+  }
+  if (!valid) {
+    alert('Please fill in your name and a valid email address to sign up.');
+    return;
+  }
+
+  // Warn if no roles selected (soft warning — doesn't block submit)
+  if (selectedRoles.length === 0) {
+    const proceed = confirm('You haven\'t selected any volunteer roles yet. Submit anyway, or cancel to go back and choose roles?');
+    if (!proceed) return;
+  }
+
+  // ── REPLACE these entry IDs with your real Google Form entry IDs ──
+  const VOLUNTEER_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_VOLUNTEER_FORM_ID/viewform';
+  const volEntryIds = {
+    name:   'entry.1346076868',   // ← Your Name field entry ID
+    email:  'entry.133104693',   // ← Your Email field entry ID
+    phone:  'entry.117815489',   // ← Your Phone field entry ID
+    town:   'entry.570994845',   // ← Your Town field entry ID
+    age:    'entry.843282456',   // ← Your Age Range field entry ID
+    roles:  'entry.578755876',   // ← Your Roles field entry ID
+    avail:  'entry.281715906',   // ← Your Availability field entry ID
+    skills: 'entry.1565048374',   // ← Your Skills field entry ID
+    size:   'entry.296787093',   // ← Your T-shirt size field entry ID
+    is21:   'entry.807048057',   // ← Your 21+ field entry ID
+    notify: 'entry.440144860',   // ← Your Email opt-in field entry ID
+  };
+  // ──────────────────────────────────────────────────────────────────
+
+  const params = new URLSearchParams();
+  params.set(volEntryIds.name,   name);
+  params.set(volEntryIds.email,  email);
+  params.set(volEntryIds.phone,  phone);
+  params.set(volEntryIds.town,   town);
+  params.set(volEntryIds.age,    age);
+  params.set(volEntryIds.roles,  rolesText);
+  params.set(volEntryIds.avail,  availChecked || 'Not specified');
+  params.set(volEntryIds.skills, skills);
+  params.set(volEntryIds.size,   size);
+  params.set(volEntryIds.is21,   is21);
+  params.set(volEntryIds.notify, notify);
+
+  // Open pre-filled Google Form in new tab
+  window.open(`${VOLUNTEER_FORM_URL}?${params.toString()}`, '_blank');
+
+  // Update volunteer counter
+  const newVol = volCount + 1;
+  localStorage.setItem('oktofest_vol_count', newVol);
+  animateCounter(volCounterEl, volCount, newVol);
+  volCount = newVol;
+
+  // Show success message, hide button
+  document.getElementById('volSuccessMsg').style.display = 'block';
+  document.querySelector('.vol-submit-btn').style.display = 'none';
+}
 
   // COPY POSTS
   function copyPost(btn) {
