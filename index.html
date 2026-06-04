@@ -1367,19 +1367,43 @@ Thanks,
     requestAnimationFrame(update);
   }
 
-  function submitPledge() {
-    const name = document.getElementById('fname').value.trim();
-    const email = document.getElementById('femail').value.trim();
-    if (!name || !email) { alert('Please enter your name and email to sign the pledge.'); return; }
-    const newCount = count + 1;
-    localStorage.setItem('oktofest_count', newCount);
-    animateCounter(counterEl, count, newCount);
-    count = newCount;
-    document.getElementById('successMsg').style.display = 'block';
-    document.querySelector('.submit-row').style.display = 'none';
-    document.querySelector('.form-note').style.display = 'none';
+function submitPledge() {
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  if (!name || !email) {
+    alert('Please enter your name and email to sign the pledge.');
+    return;
   }
 
+  const town = document.getElementById('ftown').value.trim();
+  const attended = document.getElementById('fattended').value;
+  const donate = document.getElementById('fdonate').value;
+  const notes = document.getElementById('fnotes').value.trim();
+
+  // Replace entry.XXXXXX with YOUR real entry IDs from Step 3
+  const baseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdDyx08T9a3Ronk3WwacYcSHEEC70sOiRiFDIWsdi4bTiBytQ/viewform';
+  const params = new URLSearchParams({
+    'entry.181684355': name,       // ← replace 111111 with your Name entry ID
+    'entry.585634340': email,      // ← replace 222222 with your Email entry ID
+    'entry.1747944111': town,
+    'entry.1789458142': attended,
+    'entry.1615245840': donate,
+    'entry.119144972': notes,
+  });
+
+  window.open(baseUrl + '?' + params.toString(), '_blank');
+
+  // Show thank you message on your site
+  document.getElementById('successMsg').style.display = 'block';
+  document.querySelector('.submit-row').style.display = 'none';
+
+  // Update counter
+  const newCount = count + 1;
+  localStorage.setItem('oktofest_count', newCount);
+  animateCounter(counterEl, count, newCount);
+  count = newCount;
+}
+  
   // VOLUNTEER COUNTER
   let volCount = parseInt(localStorage.getItem('oktofest_vol_count') || '0');
   const volCounterEl = document.getElementById('vol-counter');
