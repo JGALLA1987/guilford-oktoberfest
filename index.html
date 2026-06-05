@@ -1213,56 +1213,65 @@ Thanks,
   animateCounter(counterEl, count, newCount);
   count = newCount;
 }
-  function submitVolunteer() {
-    const name   = document.getElementById('vname').value.trim();
-    const email  = document.getElementById('vemail').value.trim();
-    const phone  = document.getElementById('vphone').value.trim();
-    const town   = document.getElementById('vtown').value.trim();
-    const age    = document.getElementById('vage').value;
-    const skills = document.getElementById('vskills').value.trim();
-    const size   = document.getElementById('vsize').value;
-    const is21   = document.getElementById('v21').checked ? 'Yes – I am 21 or older' : 'No';
-    const notify = document.getElementById('vnotify').checked ? 'Yes' : 'No';
-    const availChecked = [...document.querySelectorAll('.avail:checked')].map(cb => cb.value).join(', ');
-    const rolesText = selectedRoles.length > 0 ? selectedRoles.join(', ') : 'No specific role selected';
+function submitVolunteer() {
+  const name   = document.getElementById('vname').value.trim();
+  const email  = document.getElementById('vemail').value.trim();
 
-    const vNameEl  = document.getElementById('vname');
-    const vEmailEl = document.getElementById('vemail');
-    [vNameEl, vEmailEl].forEach(el => { el.style.borderColor = 'rgba(74,144,196,0.35)'; el.style.background = 'rgba(255,255,255,0.05)'; });
+  const vNameEl  = document.getElementById('vname');
+  const vEmailEl = document.getElementById('vemail');
+  [vNameEl, vEmailEl].forEach(el => {
+    el.style.borderColor = 'rgba(74,144,196,0.35)';
+    el.style.background  = 'rgba(255,255,255,0.05)';
+  });
 
-    let valid = true;
-    if (!name)  { vNameEl.style.borderColor = '#8B1A1A';  vNameEl.style.background = 'rgba(139,26,26,0.08)';  valid = false; }
-    if (!email || !email.includes('@')) { vEmailEl.style.borderColor = '#8B1A1A'; vEmailEl.style.background = 'rgba(139,26,26,0.08)'; valid = false; }
-    if (!valid) { alert('Please fill in your name and a valid email address.'); return; }
+  let valid = true;
+  if (!name)  { vNameEl.style.borderColor  = '#8B1A1A'; vNameEl.style.background  = 'rgba(139,26,26,0.08)'; valid = false; }
+  if (!email || !email.includes('@')) { vEmailEl.style.borderColor = '#8B1A1A'; vEmailEl.style.background = 'rgba(139,26,26,0.08)'; valid = false; }
+  if (!valid) { alert('Please fill in your name and a valid email address.'); return; }
 
-    if (selectedRoles.length === 0) {
-      const proceed = confirm("You haven't selected any volunteer roles yet. Submit anyway, or cancel to go back and choose roles?");
-      if (!proceed) return;
-    }
-
-    // ── REPLACE with your real Google Form URL and entry IDs ──
-    const VOLUNTEER_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_VOLUNTEER_FORM_ID/viewform';
-    const params = new URLSearchParams();
-    params.set('entry.111111', name);
-    params.set('entry.222222', email);
-    params.set('entry.333333', phone);
-    params.set('entry.444444', town);
-    params.set('entry.555555', age);
-    params.set('entry.666666', rolesText);
-    params.set('entry.777777', availChecked || 'Not specified');
-    params.set('entry.888888', skills);
-    params.set('entry.999999', size);
-    params.set('entry.101010', is21);
-    params.set('entry.121212', notify);
-    window.open(`${VOLUNTEER_FORM_URL}?${params.toString()}`, '_blank');
-
-    const newVol = volCount + 1;
-    localStorage.setItem('oktofest_vol_count', newVol);
-    animateCounter(volCounterEl, volCount, newVol);
-    volCount = newVol;
-    document.getElementById('volSuccessMsg').style.display = 'block';
-    document.querySelector('.vol-submit-btn').style.display = 'none';
+  if (selectedRoles.length === 0) {
+    const proceed = confirm("You haven't selected any volunteer roles yet. Submit anyway, or cancel to go back and choose roles?");
+    if (!proceed) return;
   }
+
+  const phone  = document.getElementById('vphone').value.trim();
+  const town   = document.getElementById('vtown').value.trim();
+  const age    = document.getElementById('vage').value;
+  const skills = document.getElementById('vskills').value.trim();
+  const size   = document.getElementById('vsize').value;
+  const rolesText = selectedRoles.length > 0 ? selectedRoles.join(', ') : 'No specific role selected';
+
+  // Availability — entry.281715906 accepts multiple values
+  const availChecked = [...document.querySelectorAll('.avail:checked')].map(cb => cb.value);
+
+  const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSf30Ut1QESmA8kFpWasguARKzDJbJvFOtG5UhkixLGhmPXVHg/formResponse';
+
+  const data = new FormData();
+  data.append('entry.1346076868', name);
+  data.append('entry.133104693',  email);
+  data.append('entry.117815489',  phone);
+  data.append('entry.570994845',  town);
+  data.append('entry.843282456',  age);
+  data.append('entry.578755876',  rolesText);
+  // Availability is a checkbox group — append each value separately
+  availChecked.forEach(val => data.append('entry.281715906', val));
+  data.append('entry.1565048374', skills);
+  data.append('entry.296787093',  size);
+
+  fetch(FORM_ACTION, {
+    method: 'POST',
+    mode:   'no-cors',
+    body:   data
+  });
+
+  // Update counter and show success
+  const newVol = volCount + 1;
+  localStorage.setItem('oktofest_vol_count', newVol);
+  animateCounter(volCounterEl, volCount, newVol);
+  volCount = newVol;
+  document.getElementById('volSuccessMsg').style.display = 'block';
+  document.querySelector('.vol-submit-btn').style.display = 'none';
+}
 
   function copyPost(btn) {
     const card = btn.closest('.post-card');
