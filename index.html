@@ -1180,44 +1180,39 @@ Thanks,
   }
 
   function submitPledge() {
-    const name = document.getElementById('fname').value.trim();
-    const email = document.getElementById('femail').value.trim();
-    const town = document.getElementById('ftown').value.trim();
-    const attended = document.getElementById('fattended').value;
-    const donate = document.getElementById('fdonate').value;
-    const notes = document.getElementById('fnotes').value.trim();
-    const notify = document.getElementById('fnotify').checked ? 'Yes' : 'No';
-
-    const nameEl = document.getElementById('fname');
-    const emailEl = document.getElementById('femail');
-    [nameEl, emailEl].forEach(el => { el.style.borderColor = 'rgba(74,144,196,0.4)'; el.style.background = 'rgba(255,255,255,0.06)'; });
-
-    let valid = true;
-    if (!name) { nameEl.style.borderColor = '#8B1A1A'; nameEl.style.background = 'rgba(139,26,26,0.08)'; valid = false; }
-    if (!email || !email.includes('@')) { emailEl.style.borderColor = '#8B1A1A'; emailEl.style.background = 'rgba(139,26,26,0.08)'; valid = false; }
-    if (!valid) { alert('Please fill in your name and a valid email address.'); return; }
-
-    // ── REPLACE with your real Google Form URL and entry IDs ──
-    const PLEDGE_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_PLEDGE_FORM_ID/viewform';
-    const params = new URLSearchParams();
-    params.set('entry.111111', name);
-    params.set('entry.222222', email);
-    params.set('entry.333333', town);
-    params.set('entry.444444', attended);
-    params.set('entry.555555', donate);
-    params.set('entry.666666', notes);
-    params.set('entry.777777', notify);
-    window.open(`${PLEDGE_FORM_URL}?${params.toString()}`, '_blank');
-
-    const newCount = count + 1;
-    localStorage.setItem('oktofest_count', newCount);
-    animateCounter(counterEl, count, newCount);
-    count = newCount;
-    document.getElementById('successMsg').style.display = 'block';
-    document.querySelector('.submit-row').style.display = 'none';
-    document.querySelector('.form-note').style.display = 'none';
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  if (!name || !email) {
+    alert('Please enter your name and email to sign the pledge.');
+    return;
   }
 
+  const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdDyx08T9a3Ronk3WwacYcSHEEC70sOiRiFDIWsdi4bTiBytQ/formResponse';
+
+  const data = new FormData();
+  data.append('entry.181684355', name);
+  data.append('entry.585634340', document.getElementById('femail').value.trim());
+  data.append('entry.1747944111', document.getElementById('ftown').value.trim());
+  data.append('entry.1789458142', document.getElementById('fattended').value);
+  data.append('entry.1615245840', document.getElementById('fdonate').value);
+  data.append('entry.119144972', document.getElementById('fnotes').value.trim());
+
+  // Use no-cors because Google Forms blocks cross-origin responses
+  fetch(FORM_ACTION, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: data
+  });
+
+  // Show thank-you immediately (can't read the response due to no-cors)
+  document.getElementById('successMsg').style.display = 'block';
+  document.querySelector('.submit-row').style.display = 'none';
+
+  const newCount = count + 1;
+  localStorage.setItem('oktofest_count', newCount);
+  animateCounter(counterEl, count, newCount);
+  count = newCount;
+}
   function submitVolunteer() {
     const name   = document.getElementById('vname').value.trim();
     const email  = document.getElementById('vemail').value.trim();
