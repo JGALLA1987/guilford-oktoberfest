@@ -7,35 +7,56 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
   :root {
-    --amber: #C8761A;
-    --deep-amber: #8B4A0A;
-    --cream: #F5EDD6;
-    --forest: #2C4A2E;
-    --rust: #9B3A1A;
-    --gold: #D4A017;
-    --dark: #1A1208;
-    --bark: #5C3D1E;
+    --blue:        #4A90C4;   /* Bavarian sky blue */
+    --deep-blue:   #1A3A5C;   /* dark navy text/headers */
+    --navy:        #0D2238;   /* deepest navy for nav/footer */
+    --red:         #8B1A1A;   /* Oktoberfest title red */
+    --gold:        #F5A623;   /* maple leaf / banner gold */
+    --orange:      #D4600A;   /* swirl ribbon orange */
+    --green:       #2D5A1B;   /* alpine hat green */
+    --white:       #F0F8FF;   /* light blue-white background */
+    --cream:       #FFFEF5;   /* warm white text on dark */
+    --light-blue:  #C8E0F0;   /* diamond pattern light */
+    --mid-blue:    #7AB5D8;   /* mid tone blue */
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-color: var(--dark);
-    color: var(--cream);
+    background-color: var(--white);
+    color: var(--deep-blue);
     font-family: 'Libre Baskerville', Georgia, serif;
     overflow-x: hidden;
+  }
+
+  /* ARGYLE / DIAMOND BACKGROUND PATTERN */
+  .argyle {
+    background-color: var(--white);
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        rgba(74,144,196,0.12) 0px,
+        rgba(74,144,196,0.12) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(74,144,196,0.12) 0px,
+        rgba(74,144,196,0.12) 1px,
+        transparent 1px,
+        transparent 40px
+      );
   }
 
   /* NAV TABS */
   .site-nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 100;
-    background: rgba(26,18,8,0.96);
+    background: rgba(13,34,56,0.97);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(200,118,26,0.25);
+    border-bottom: 3px solid var(--gold);
     display: flex;
     justify-content: center;
     gap: 0;
@@ -45,16 +66,17 @@
     font-size: 0.72rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #7a6a4a;
+    color: var(--light-blue);
     padding: 1rem 1.8rem;
     cursor: pointer;
     border: none;
     background: transparent;
-    border-bottom: 2px solid transparent;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
     transition: all 0.2s;
   }
   .nav-tab:hover { color: var(--cream); }
-  .nav-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+  .nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
 
   /* PAGES */
   .page { display: none; }
@@ -71,25 +93,25 @@
     padding: 6rem 2rem 3rem;
     position: relative;
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(200,118,26,0.18) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(155,58,26,0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 60% 80%, rgba(44,74,46,0.20) 0%, transparent 50%),
-      var(--dark);
+      radial-gradient(ellipse at 20% 40%, rgba(74,144,196,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 20%, rgba(245,166,35,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(74,144,196,0.20) 0%, transparent 50%),
+      #0D2238;
     overflow: hidden;
   }
-
   .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8761A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.5;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(74,144,196,0.08) 0px, rgba(74,144,196,0.08) 1px, transparent 1px, transparent 50px),
+      repeating-linear-gradient(-45deg, rgba(74,144,196,0.08) 0px, rgba(74,144,196,0.08) 1px, transparent 1px, transparent 50px);
   }
 
   .leaf {
     position: absolute;
     font-size: 3rem;
-    opacity: 0.12;
+    opacity: 0.14;
     animation: drift 12s ease-in-out infinite;
     pointer-events: none;
   }
@@ -98,7 +120,6 @@
   .leaf:nth-child(3) { bottom: 25%; left: 12%; animation-delay: 4s; font-size: 3.5rem; }
   .leaf:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 1s; font-size: 2rem; }
   .leaf:nth-child(5) { top: 50%; left: 2%; animation-delay: 6s; font-size: 5rem; }
-
   @keyframes drift {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     33% { transform: translateY(-18px) rotate(5deg); }
@@ -107,8 +128,8 @@
 
   .badge {
     display: inline-block;
-    border: 2px solid var(--amber);
-    color: var(--amber);
+    border: 2px solid var(--gold);
+    color: var(--gold);
     font-family: 'Special Elite', monospace;
     font-size: 0.75rem;
     letter-spacing: 0.3em;
@@ -125,11 +146,10 @@
     font-weight: 900;
     line-height: 0.85;
     color: transparent;
-    -webkit-text-stroke: 2px var(--amber);
-    opacity: 0.15;
+    -webkit-text-stroke: 2px rgba(74,144,196,0.4);
+    opacity: 0.3;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     white-space: nowrap;
     pointer-events: none;
@@ -146,15 +166,16 @@
     z-index: 1;
     animation: fadeUp 0.9s 0.2s ease forwards;
     opacity: 0;
+    text-shadow: 2px 2px 12px rgba(0,0,0,0.5);
   }
-
-  .hero-title .accent { color: var(--amber); }
+  .hero-title .accent { color: var(--gold); }
+  .hero-title .accent-red { color: #E8453C; }
 
   .hero-sub {
     font-family: 'Libre Baskerville', serif;
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     font-style: italic;
-    color: #b8a882;
+    color: var(--light-blue);
     margin-top: 1.5rem;
     max-width: 560px;
     line-height: 1.7;
@@ -176,6 +197,12 @@
     z-index: 1;
   }
 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* BUTTONS */
   .btn {
     padding: 0.9rem 2.2rem;
     font-family: 'Special Elite', monospace;
@@ -188,17 +215,14 @@
     text-decoration: none;
     display: inline-block;
   }
-  .btn-primary { background: var(--amber); color: var(--dark); }
-  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,118,26,0.35); }
-  .btn-outline { background: transparent; color: var(--cream); border: 2px solid var(--cream); }
-  .btn-outline:hover { background: var(--cream); color: var(--dark); transform: translateY(-2px); }
-  .btn-green { background: var(--forest); color: var(--cream); border: 2px solid #4a8a4c; }
-  .btn-green:hover { background: #3a6a3c; transform: translateY(-2px); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .btn-primary { background: var(--red); color: var(--cream); border: 2px solid #6B1010; }
+  .btn-primary:hover { background: #A02020; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,26,26,0.4); }
+  .btn-gold { background: var(--gold); color: var(--navy); border: 2px solid var(--orange); }
+  .btn-gold:hover { background: #F0B830; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.4); }
+  .btn-outline { background: transparent; color: var(--cream); border: 2px solid var(--light-blue); }
+  .btn-outline:hover { background: var(--cream); color: var(--navy); transform: translateY(-2px); }
+  .btn-green { background: var(--green); color: var(--cream); border: 2px solid #4a8a2c; }
+  .btn-green:hover { background: #3a7a1a; transform: translateY(-2px); }
 
   /* DIVIDER */
   .divider {
@@ -212,20 +236,44 @@
   .divider::before, .divider::after {
     content: '';
     flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--amber), transparent);
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--blue), transparent);
   }
-  .divider-icon { color: var(--amber); font-size: 1.5rem; }
+  .divider-icon { color: var(--blue); font-size: 1.5rem; }
 
   /* SECTIONS */
   section { padding: 5rem 2rem; }
   .container { max-width: 960px; margin: 0 auto; }
 
+  .section-label {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--deep-blue);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .section-intro {
+    color: #4A6A8A;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 620px;
+    margin-bottom: 3.5rem;
+  }
+
   /* STORY */
   .story {
-    background: linear-gradient(135deg, #1f1607 0%, #150e04 100%);
-    border-top: 1px solid rgba(200,118,26,0.2);
-    border-bottom: 1px solid rgba(200,118,26,0.2);
+    background: #E8F2FA;
+    border-top: 3px solid var(--blue);
+    border-bottom: 3px solid var(--blue);
   }
   .story-grid {
     display: grid;
@@ -237,33 +285,34 @@
     font-family: 'Playfair Display', serif;
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 700;
-    color: var(--cream);
+    color: var(--deep-blue);
     line-height: 1.2;
     margin-bottom: 1.5rem;
   }
-  .story-grid h2 em { color: var(--amber); font-style: italic; }
-  .story-grid p { color: #a89870; line-height: 1.9; font-size: 1rem; margin-bottom: 1rem; }
+  .story-grid h2 em { color: var(--red); font-style: italic; }
+  .story-grid p { color: #3A5A7A; line-height: 1.9; font-size: 1rem; margin-bottom: 1rem; }
 
   .memory-card {
-    background: rgba(200,118,26,0.08);
-    border: 1px solid rgba(200,118,26,0.25);
+    background: white;
+    border: 2px solid var(--blue);
+    border-left: 6px solid var(--red);
     padding: 2.5rem;
     position: relative;
+    box-shadow: 4px 4px 0px rgba(74,144,196,0.2);
   }
   .memory-card::before {
     content: '"';
     font-family: 'Playfair Display', serif;
     font-size: 8rem;
-    color: var(--amber);
-    opacity: 0.15;
+    color: var(--gold);
+    opacity: 0.2;
     position: absolute;
-    top: -1rem;
-    left: 1rem;
+    top: -1rem; left: 1rem;
     line-height: 1;
   }
   .memory-card p {
     font-style: italic;
-    color: var(--cream) !important;
+    color: var(--deep-blue) !important;
     font-size: 1.1rem !important;
     line-height: 1.8 !important;
     margin-bottom: 1rem !important;
@@ -274,40 +323,46 @@
     font-size: 0.8rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--amber);
+    color: var(--blue);
     font-style: normal;
     font-family: 'Special Elite', monospace;
   }
 
-  /* SAME TEAM SECTION */
+  /* SAME TEAM */
   .same-team {
-    background: var(--dark);
-    border-top: 1px solid rgba(200,118,26,0.15);
+    background: var(--navy);
+    border-top: 3px solid var(--gold);
+    border-bottom: 3px solid var(--gold);
   }
+  .same-team .section-label { color: var(--gold); }
+  .same-team .section-title { color: var(--cream); }
+  .same-team .section-intro { color: var(--light-blue); }
+
   .same-team-banner {
-    background: linear-gradient(90deg, rgba(200,118,26,0.12) 0%, rgba(200,118,26,0.05) 50%, rgba(200,118,26,0.12) 100%);
-    border: 1px solid rgba(200,118,26,0.3);
+    background: rgba(74,144,196,0.12);
+    border: 2px solid rgba(74,144,196,0.35);
+    border-left: 6px solid var(--gold);
     padding: 2.5rem 3rem;
     display: flex;
     align-items: center;
     gap: 3rem;
     margin-bottom: 3rem;
   }
-  .same-team-banner .years-badge {
+  .years-badge {
     flex-shrink: 0;
-    width: 110px;
-    height: 110px;
-    border: 2px solid var(--amber);
+    width: 110px; height: 110px;
+    border: 3px solid var(--gold);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    background: rgba(245,166,35,0.1);
   }
-  .same-team-banner .years-badge .yr { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--amber); line-height: 1; }
-  .same-team-banner .years-badge .yr-label { font-family: 'Special Elite', monospace; font-size: 0.55rem; letter-spacing: 0.2em; color: #7a6a4a; text-transform: uppercase; margin-top: 4px; }
-  .same-team-banner p { color: #b8a882; line-height: 1.85; font-size: 1.05rem; }
+  .years-badge .yr { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--gold); line-height: 1; }
+  .years-badge .yr-label { font-family: 'Special Elite', monospace; font-size: 0.55rem; letter-spacing: 0.2em; color: var(--light-blue); text-transform: uppercase; margin-top: 4px; }
+  .same-team-banner p { color: var(--light-blue); line-height: 1.85; font-size: 1.05rem; }
   .same-team-banner p strong { color: var(--cream); }
 
   .credentials-grid {
@@ -316,96 +371,71 @@
     gap: 1.5rem;
   }
   .cred-item {
-    border-left: 3px solid var(--amber);
+    border-left: 4px solid var(--gold);
     padding: 1rem 1.5rem;
-    background: rgba(200,118,26,0.04);
+    background: rgba(74,144,196,0.08);
+    border-top: 1px solid rgba(74,144,196,0.2);
+    border-right: 1px solid rgba(74,144,196,0.2);
+    border-bottom: 1px solid rgba(74,144,196,0.2);
   }
-  .cred-item h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--cream);
-    margin-bottom: 0.4rem;
-  }
-  .cred-item p { font-size: 0.85rem; color: #7a6a4a; line-height: 1.6; }
+  .cred-item h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.4rem; }
+  .cred-item p { font-size: 0.85rem; color: var(--mid-blue); line-height: 1.6; }
 
   /* WHAT WE NEED */
-  .what-we-need { background: var(--dark); border-top: 1px solid rgba(200,118,26,0.1); }
-  .section-label {
-    font-family: 'Special Elite', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 1rem;
+  .what-we-need {
+    background: white;
+    border-top: 1px solid var(--light-blue);
   }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 900;
-    color: var(--cream);
-    margin-bottom: 1rem;
-    line-height: 1.15;
-  }
-  .section-intro {
-    color: #9a8a6a;
-    font-size: 1.05rem;
-    line-height: 1.8;
-    max-width: 620px;
-    margin-bottom: 3.5rem;
-  }
-  .needs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-  }
+  .needs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
   .need-item {
-    border: 1px solid rgba(200,118,26,0.2);
+    border: 2px solid var(--light-blue);
+    border-top: 4px solid var(--blue);
     padding: 2rem;
+    background: white;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
   }
-  .need-item::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--amber);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-  }
-  .need-item:hover { border-color: rgba(200,118,26,0.5); background: rgba(200,118,26,0.05); }
-  .need-item:hover::after { transform: scaleX(1); }
+  .need-item:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(74,144,196,0.15); transform: translateY(-3px); }
   .need-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
-  .need-item h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--cream); margin-bottom: 0.5rem; }
-  .need-item p { color: #7a6a4a; font-size: 0.9rem; line-height: 1.7; }
+  .need-item h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--deep-blue); margin-bottom: 0.5rem; }
+  .need-item p { color: #5A7A9A; font-size: 0.9rem; line-height: 1.7; }
 
-  /* SOCIAL COPY TOOLKIT */
-  .toolkit { background: #110d04; border-top: 1px solid rgba(200,118,26,0.15); }
+  /* SOCIAL TOOLKIT */
+  .toolkit {
+    background: #E8F2FA;
+    border-top: 3px solid var(--blue);
+  }
   .posts-grid { display: grid; gap: 1.5rem; }
-  .post-card { border: 1px solid rgba(200,118,26,0.2); padding: 1.8rem 2rem; position: relative; transition: border-color 0.25s; }
-  .post-card:hover { border-color: rgba(200,118,26,0.45); }
+  .post-card {
+    border: 2px solid var(--light-blue);
+    border-left: 5px solid var(--red);
+    padding: 1.8rem 2rem;
+    background: white;
+    position: relative;
+    transition: border-color 0.25s;
+  }
+  .post-card:hover { border-color: var(--blue); }
   .post-platform {
     font-family: 'Special Elite', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: var(--amber);
+    color: var(--blue);
     margin-bottom: 0.8rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-  .post-platform::before { content: ''; width: 20px; height: 1px; background: var(--amber); }
-  .post-body { color: #ccc0a0; line-height: 1.75; font-size: 0.97rem; margin-bottom: 1rem; white-space: pre-line; }
-  .post-hashtags { color: #6a8f6c; font-size: 0.88rem; font-style: italic; }
+  .post-platform::before { content: ''; width: 20px; height: 2px; background: var(--blue); }
+  .post-body { color: var(--deep-blue); line-height: 1.75; font-size: 0.97rem; margin-bottom: 1rem; white-space: pre-line; }
+  .post-hashtags { color: var(--green); font-size: 0.88rem; font-style: italic; }
   .copy-btn {
     position: absolute;
     top: 1.2rem; right: 1.2rem;
-    background: rgba(200,118,26,0.12);
-    border: 1px solid rgba(200,118,26,0.3);
-    color: var(--amber);
+    background: rgba(74,144,196,0.1);
+    border: 1px solid var(--blue);
+    color: var(--blue);
     padding: 0.3rem 0.8rem;
     font-family: 'Special Elite', monospace;
     font-size: 0.65rem;
@@ -414,20 +444,15 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-  .copy-btn:hover { background: rgba(200,118,26,0.25); }
-  .copy-btn.copied { background: rgba(44,74,46,0.4); border-color: var(--forest); color: #6aaf6c; }
+  .copy-btn:hover { background: rgba(74,144,196,0.2); }
+  .copy-btn.copied { background: rgba(45,90,27,0.15); border-color: var(--green); color: var(--green); }
 
   /* INTEREST FORM */
   .interest-form {
-    background: linear-gradient(160deg, #1c1205 0%, #0e0a02 100%);
-    border-top: 1px solid rgba(200,118,26,0.2);
+    background: var(--navy);
+    border-top: 3px solid var(--blue);
   }
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    align-items: start;
-  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
   .form-fields { display: flex; flex-direction: column; gap: 1.2rem; }
   .field-group { display: flex; flex-direction: column; gap: 0.4rem; }
   .field-group label {
@@ -435,13 +460,13 @@
     font-size: 0.68rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--amber);
+    color: var(--gold);
   }
   .field-group input,
   .field-group select,
   .field-group textarea {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(200,118,26,0.25);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(74,144,196,0.4);
     color: var(--cream);
     padding: 0.75rem 1rem;
     font-family: 'Libre Baskerville', serif;
@@ -452,15 +477,12 @@
   }
   .field-group input:focus,
   .field-group select:focus,
-  .field-group textarea:focus { border-color: var(--amber); }
-  .field-group select option { background: #1a1208; }
+  .field-group textarea:focus { border-color: var(--gold); }
+  .field-group select option { background: var(--navy); }
   .field-group textarea { resize: vertical; min-height: 90px; }
-
   .checkbox-row { display: flex; align-items: flex-start; gap: 0.7rem; margin-top: 0.3rem; }
-  .checkbox-row input[type=checkbox] { margin-top: 4px; accent-color: var(--amber); }
-  .checkbox-row span { font-size: 0.88rem; color: #9a8a6a; line-height: 1.5; }
-
-  .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .checkbox-row input[type=checkbox] { margin-top: 4px; accent-color: var(--gold); }
+  .checkbox-row span { font-size: 0.88rem; color: var(--light-blue); line-height: 1.5; }
 
   .form-info h3 {
     font-family: 'Playfair Display', serif;
@@ -470,10 +492,13 @@
     margin-bottom: 1.2rem;
     line-height: 1.3;
   }
-  .form-info h3 em { color: var(--amber); font-style: italic; }
+  .form-info h3 em { color: var(--gold); font-style: italic; }
+  .form-info > p { color: var(--light-blue); }
+
   .tally-box {
-    background: rgba(200,118,26,0.08);
-    border: 1px solid rgba(200,118,26,0.25);
+    background: rgba(74,144,196,0.12);
+    border: 2px solid rgba(74,144,196,0.35);
+    border-left: 5px solid var(--gold);
     padding: 1.5rem;
     margin-top: 1.5rem;
   }
@@ -482,25 +507,40 @@
     font-size: 0.7rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #7a6a4a;
+    color: var(--mid-blue);
     margin-bottom: 0.5rem;
   }
-  .tally-count { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--amber); line-height: 1; }
-  .tally-sub { font-size: 0.8rem !important; color: #5a4a2a !important; margin-top: 0.25rem !important; }
+  .tally-count { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; }
+  .tally-sub { font-size: 0.8rem !important; color: var(--mid-blue) !important; margin-top: 0.25rem !important; }
 
   .submit-row { display: flex; gap: 1rem; margin-top: 0.8rem; flex-wrap: wrap; align-items: center; }
   .submit-row .btn-primary { flex: 1; text-align: center; }
-  .form-note { font-size: 0.78rem; color: #5a4a2a; font-style: italic; }
+  .form-note { font-size: 0.78rem; color: rgba(74,144,196,0.5); font-style: italic; }
 
-  /* CAMPAIGN PHASES */
-  .phases { background: var(--dark); }
+  .success-msg {
+    display: none;
+    background: rgba(45,90,27,0.25);
+    border: 1px solid rgba(74,175,76,0.5);
+    color: #8ad48c;
+    padding: 1rem 1.5rem;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+
+  /* PHASES */
+  .phases {
+    background: #E8F2FA;
+    border-top: 3px solid var(--blue);
+  }
   .phases-list { display: grid; gap: 0; }
   .phase {
     display: grid;
     grid-template-columns: 80px 1fr;
     gap: 2rem;
     padding: 2rem 0;
-    border-bottom: 1px solid rgba(200,118,26,0.1);
+    border-bottom: 1px solid var(--light-blue);
     align-items: start;
   }
   .phase:last-child { border-bottom: none; }
@@ -509,42 +549,40 @@
     font-size: 3.5rem;
     font-weight: 900;
     color: transparent;
-    -webkit-text-stroke: 1.5px rgba(200,118,26,0.35);
+    -webkit-text-stroke: 2px rgba(74,144,196,0.35);
     line-height: 1;
     padding-top: 0.2rem;
   }
-  .phase h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--cream); margin-bottom: 0.5rem; }
-  .phase p { color: #8a7a5a; font-size: 0.93rem; line-height: 1.75; }
+  .phase h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--deep-blue); margin-bottom: 0.5rem; }
+  .phase p { color: #5A7A9A; font-size: 0.93rem; line-height: 1.75; }
   .phase-tag {
     display: inline-block;
-    background: rgba(200,118,26,0.12);
-    color: var(--amber);
+    background: rgba(74,144,196,0.12);
+    color: var(--blue);
     font-family: 'Special Elite', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     padding: 0.2rem 0.6rem;
     margin-top: 0.5rem;
+    border: 1px solid var(--light-blue);
   }
 
-  /* VOLUNTEER PAGE */
+  /* ── VOLUNTEER PAGE ── */
   .volunteer-hero {
-    background: linear-gradient(135deg, #0d1a0e 0%, #1A1208 100%);
+    background: linear-gradient(135deg, #0D2238 0%, #1A3A5C 100%);
     padding: 8rem 2rem 5rem;
     text-align: center;
-    border-bottom: 1px solid rgba(74,138,76,0.3);
+    border-bottom: 4px solid var(--gold);
     position: relative;
     overflow: hidden;
   }
   .volunteer-hero::before {
-    content: '🌿';
-    font-size: 18rem;
-    opacity: 0.04;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(74,144,196,0.08) 0px, rgba(74,144,196,0.08) 1px, transparent 1px, transparent 50px),
+      repeating-linear-gradient(-45deg, rgba(74,144,196,0.08) 0px, rgba(74,144,196,0.08) 1px, transparent 1px, transparent 50px);
   }
   .volunteer-hero h1 {
     font-family: 'Playfair Display', serif;
@@ -554,106 +592,75 @@
     line-height: 1.1;
     max-width: 700px;
     margin: 0 auto 1.5rem;
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
+    text-shadow: 2px 2px 12px rgba(0,0,0,0.5);
   }
-  .volunteer-hero h1 .accent { color: #6aaf6c; }
+  .volunteer-hero h1 .accent { color: var(--gold); }
   .volunteer-hero p {
     font-style: italic;
-    color: #9a9a7a;
+    color: var(--light-blue);
     font-size: 1.1rem;
     line-height: 1.75;
     max-width: 520px;
     margin: 0 auto 2rem;
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
   }
-
   .vol-badge {
     display: inline-block;
-    border: 2px solid #4a8a4c;
-    color: #6aaf6c;
+    border: 2px solid var(--gold);
+    color: var(--gold);
     font-family: 'Special Elite', monospace;
     font-size: 0.72rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     padding: 0.4rem 1.2rem;
     margin-bottom: 2rem;
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
   }
 
   .volunteer-roles {
-    background: #0f180f;
+    background: white;
     padding: 5rem 2rem;
-    border-bottom: 1px solid rgba(74,138,76,0.15);
+    border-bottom: 1px solid var(--light-blue);
   }
-  .vol-section-label {
-    font-family: 'Special Elite', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: #6aaf6c;
-    margin-bottom: 1rem;
-  }
-  .roles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-  }
+  .vol-section-label { font-family: 'Special Elite', monospace; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--blue); margin-bottom: 1rem; }
+
+  .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
   .role-card {
-    border: 1px solid rgba(74,138,76,0.25);
+    border: 2px solid var(--light-blue);
+    border-top: 4px solid var(--blue);
     padding: 1.8rem;
+    background: white;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
     cursor: pointer;
   }
-  .role-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: #4a8a4c;
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-  }
-  .role-card:hover { border-color: rgba(74,138,76,0.5); background: rgba(74,138,76,0.05); }
-  .role-card:hover::after { transform: scaleX(1); }
-  .role-card.selected { border-color: #6aaf6c; background: rgba(74,138,76,0.1); }
-  .role-card.selected::after { transform: scaleX(1); }
+  .role-card:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(74,144,196,0.15); transform: translateY(-3px); }
+  .role-card.selected { border-color: var(--red); border-top-color: var(--red); background: rgba(139,26,26,0.04); box-shadow: 0 4px 20px rgba(139,26,26,0.12); }
   .role-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
-  .role-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.4rem; }
-  .role-card p { font-size: 0.85rem; color: #6a7a5a; line-height: 1.65; margin-bottom: 0.8rem; }
-  .role-time { font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.15em; color: #4a8a4c; text-transform: uppercase; }
+  .role-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--deep-blue); margin-bottom: 0.4rem; }
+  .role-card p { font-size: 0.85rem; color: #5A7A9A; line-height: 1.65; margin-bottom: 0.8rem; }
+  .role-time { font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.15em; color: var(--blue); text-transform: uppercase; }
   .role-check {
     position: absolute;
     top: 1rem; right: 1rem;
     width: 22px; height: 22px;
-    border: 1.5px solid rgba(74,138,76,0.3);
+    border: 2px solid var(--light-blue);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     font-size: 0.75rem;
     color: transparent;
     transition: all 0.2s;
   }
-  .role-card.selected .role-check { background: #4a8a4c; border-color: #4a8a4c; color: white; }
+  .role-card.selected .role-check { background: var(--red); border-color: var(--red); color: white; }
 
   /* VOLUNTEER FORM */
   .volunteer-form {
-    background: linear-gradient(160deg, #0d150e 0%, #0a0f05 100%);
+    background: var(--navy);
     padding: 5rem 2rem;
-    border-top: 1px solid rgba(74,138,76,0.15);
+    border-top: 3px solid var(--blue);
   }
-  .vol-form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
+  .vol-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
   .vol-form-info h2 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.8rem, 3.5vw, 2.5rem);
@@ -662,38 +669,26 @@
     margin-bottom: 1rem;
     line-height: 1.2;
   }
-  .vol-form-info h2 em { color: #6aaf6c; font-style: italic; }
-  .vol-form-info p { color: #8a8a6a; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; }
+  .vol-form-info h2 em { color: var(--gold); font-style: italic; }
+  .vol-form-info p { color: var(--light-blue); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; }
 
   .vol-tally-box {
-    background: rgba(74,138,76,0.08);
-    border: 1px solid rgba(74,138,76,0.25);
+    background: rgba(74,144,196,0.12);
+    border: 2px solid rgba(74,144,196,0.35);
+    border-left: 5px solid var(--gold);
     padding: 1.5rem;
     margin-top: 1.5rem;
   }
-  .vol-tally-box p {
-    font-family: 'Special Elite', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #5a6a4a;
-    margin-bottom: 0.5rem;
-  }
-  .vol-tally-count { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: #6aaf6c; line-height: 1; }
+  .vol-tally-box p { font-family: 'Special Elite', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid-blue); margin-bottom: 0.5rem; }
+  .vol-tally-count { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; }
 
   .vol-field-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
-  .vol-field-group label {
-    font-family: 'Special Elite', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #6aaf6c;
-  }
+  .vol-field-group label { font-family: 'Special Elite', monospace; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
   .vol-field-group input,
   .vol-field-group select,
   .vol-field-group textarea {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(74,138,76,0.25);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(74,144,196,0.35);
     color: var(--cream);
     padding: 0.75rem 1rem;
     font-family: 'Libre Baskerville', serif;
@@ -704,20 +699,20 @@
   }
   .vol-field-group input:focus,
   .vol-field-group select:focus,
-  .vol-field-group textarea:focus { border-color: #6aaf6c; }
-  .vol-field-group select option { background: #0d150e; }
+  .vol-field-group textarea:focus { border-color: var(--gold); }
+  .vol-field-group select option { background: var(--navy); }
   .vol-field-group textarea { resize: vertical; min-height: 80px; }
 
   .vol-checkbox-row { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.6rem; }
-  .vol-checkbox-row input[type=checkbox] { margin-top: 4px; accent-color: #6aaf6c; }
-  .vol-checkbox-row span { font-size: 0.88rem; color: #9a9a6a; line-height: 1.5; }
+  .vol-checkbox-row input[type=checkbox] { margin-top: 4px; accent-color: var(--gold); }
+  .vol-checkbox-row span { font-size: 0.88rem; color: var(--light-blue); line-height: 1.5; }
 
   .selected-roles-display {
-    background: rgba(74,138,76,0.08);
-    border: 1px solid rgba(74,138,76,0.2);
+    background: rgba(74,144,196,0.08);
+    border: 1px solid rgba(74,144,196,0.25);
     padding: 0.8rem 1rem;
     font-size: 0.85rem;
-    color: #6aaf6c;
+    color: var(--mid-blue);
     font-style: italic;
     margin-bottom: 1.2rem;
     min-height: 44px;
@@ -726,8 +721,8 @@
   .vol-submit-btn {
     width: 100%;
     padding: 1rem 2rem;
-    background: #2C4A2E;
-    border: 2px solid #4a8a4c;
+    background: var(--red);
+    border: 2px solid #6B1010;
     color: var(--cream);
     font-family: 'Special Elite', monospace;
     font-size: 0.9rem;
@@ -737,12 +732,12 @@
     transition: all 0.25s;
     margin-top: 0.5rem;
   }
-  .vol-submit-btn:hover { background: #3a6a3c; transform: translateY(-2px); }
+  .vol-submit-btn:hover { background: #A02020; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,26,26,0.35); }
 
   .vol-success-msg {
     display: none;
-    background: rgba(44,74,46,0.25);
-    border: 1px solid rgba(106,175,108,0.4);
+    background: rgba(45,90,27,0.25);
+    border: 1px solid rgba(74,175,76,0.5);
     color: #8ad48c;
     padding: 1rem 1.5rem;
     font-family: 'Special Elite', monospace;
@@ -754,34 +749,21 @@
 
   /* FOOTER */
   footer {
-    background: #0a0702;
-    border-top: 1px solid rgba(200,118,26,0.15);
+    background: var(--navy);
+    border-top: 4px solid var(--gold);
     padding: 3rem 2rem;
     text-align: center;
   }
-  .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--amber); margin-bottom: 0.5rem; }
-  footer p { color: #4a3a1a; font-size: 0.85rem; margin-top: 0.5rem; }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); margin-bottom: 0.5rem; }
+  footer p { color: var(--mid-blue); font-size: 0.85rem; margin-top: 0.5rem; }
 
-  /* SUCCESS STATE */
-  .success-msg {
-    display: none;
-    background: rgba(44,74,46,0.2);
-    border: 1px solid rgba(106,175,108,0.4);
-    color: #8ad48c;
-    padding: 1rem 1.5rem;
-    font-family: 'Special Elite', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-align: center;
-  }
-
+  /* RESPONSIVE */
   @media (max-width: 700px) {
     .story-grid, .form-grid, .vol-form-grid { grid-template-columns: 1fr; gap: 2rem; }
     .phase { grid-template-columns: 60px 1fr; gap: 1rem; }
     .phase-num { font-size: 2.5rem; }
     .same-team-banner { flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
     .nav-tab { padding: 0.8rem 0.9rem; font-size: 0.6rem; letter-spacing: 0.12em; }
-    .checkbox-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -793,7 +775,7 @@
   <button class="nav-tab" onclick="showPage('volunteer')">🤝 Volunteer</button>
 </nav>
 
-<!-- ===================== MAIN PAGE ===================== -->
+<!-- ===== MAIN PAGE ===== -->
 <div class="page active" id="page-main">
 
 <!-- HERO -->
@@ -805,27 +787,27 @@
   <span class="leaf">🎶</span>
   <div class="hero-year">2013</div>
   <div class="badge">Guilford, Connecticut · Edelweiss Lodge</div>
-  <h1 class="hero-title">Bring Back the<br><span class="accent">Shoreline Oktoberfest</span></h1>
+  <h1 class="hero-title">Bring Back the<br><span class="accent-red">Shoreline</span> <span class="accent">Oktoberfest</span></h1>
   <p class="hero-sub">It happened once — by the water, under the autumn sky, with cold beer, good music, and this whole community together. The same people who built it in 2013 are ready to build it again.</p>
   <div class="hero-cta">
     <a href="#pledge" class="btn btn-primary" onclick="showPage('main'); setTimeout(()=>document.getElementById('pledge').scrollIntoView({behavior:'smooth'}),50)">Sign the Interest Pledge</a>
-    <button class="btn btn-green" onclick="showPage('volunteer')">Volunteer Sign-Up</button>
+    <button class="btn btn-gold" onclick="showPage('volunteer')">Volunteer Sign-Up</button>
     <a href="#toolkit" class="btn btn-outline" onclick="setTimeout(()=>document.getElementById('toolkit').scrollIntoView({behavior:'smooth'}),50)">Share the Campaign</a>
   </div>
 </section>
 
-<div class="divider" style="padding:1.5rem 2rem;"><span class="divider-icon">🌊</span></div>
+<div class="divider argyle" style="padding:1.5rem 2rem;"><span class="divider-icon">🌊</span></div>
 
 <!-- STORY -->
-<section class="story">
+<section class="story argyle">
   <div class="container">
     <div class="story-grid">
       <div>
         <p class="section-label">The Memory</p>
         <h2>It was <em>something special</em> on the Guilford shore</h2>
         <p>Back in the fall of 2013, Guilford came alive with the sounds, smells, and spirit of a classic Oktoberfest — right along the Connecticut shoreline. Craft beer, live music, local vendors, and the warmth of a town coming together.</p>
-        <p>It was the kind of event that feels like Guilford at its best. And then it was gone. But the memory stayed.</p>
-        <p>This campaign is about finding out: <strong style="color:var(--cream);">are enough of us ready to bring it back?</strong></p>
+        <p>Organized by the <strong>St. George Men's Group</strong> and sponsored by the <strong>Edelweiss Lodge</strong>, the festival drew crowds to the Guilford Fairgrounds on Lover's Lane for three incredible days — October 18, 19, and 20. Jimmy Sturr & His Orchestra, Hofbräuhaus beer, 33,000 sq ft of tented fun, and 100% of proceeds donated to charity.</p>
+        <p>This campaign is about finding out: <strong>are enough of us ready to bring it back?</strong></p>
       </div>
       <div class="memory-card">
         <p>The smell of bratwurst, the sound of a polka band drifting off the water, families and neighbors all in one place on a crisp October afternoon. That was Guilford at its absolute best.</p>
@@ -835,48 +817,46 @@
   </div>
 </section>
 
-<div class="divider" style="padding:1.5rem 2rem;"><span class="divider-icon">🏅</span></div>
+<div class="divider argyle" style="padding:1.5rem 2rem;"><span class="divider-icon">🏅</span></div>
 
-<!-- SAME TEAM SECTION -->
+<!-- SAME TEAM -->
 <section class="same-team">
   <div class="container">
     <p class="section-label">The Team Behind It</p>
     <h2 class="section-title">The Same People.<br>The Same Passion.</h2>
-    <p class="section-intro">This isn't a new idea from people who heard about a festival. This is the original team — the people who actually built the 2013 Oktoberfest — coming back to do it again, better than ever.</p>
-
+    <p class="section-intro">This isn't a new idea from people who heard about a festival. This is the original team — the people who actually built the 2013 Oktoberfest — coming back to do it again.</p>
     <div class="same-team-banner">
       <div class="years-badge">
         <span class="yr">10+</span>
         <span class="yr-label">Years of<br>Experience</span>
       </div>
-      <p>The <strong>Edelweiss Lodge of the Hermann Sons of Connecticut</strong> organized and ran the original 2013 Guilford Shoreline Oktoberfest from the ground up. We booked the venue, coordinated the vendors, brought in the entertainment, and poured the beer. We know exactly what it takes — because we've already done it. Now, as a fully registered <strong>501(c) charitable organization</strong>, we're coming back with even stronger community ties, better planning, and a mission that goes beyond a great party: every dollar raised goes to support our local VFW.</p>
+      <p>The <strong>Edelweiss Lodge of the Hermann Sons of Connecticut</strong> organized and ran the original 2013 Guilford Shoreline Oktoberfest from the ground up. We booked the venue at the <strong>Guilford Fairgrounds on Lover's Lane</strong>, coordinated entertainment including Jimmy Sturr & His Orchestra, brought in Hofbräuhaus beer from Munich, and delivered a true Oktoberfest experience across three full days. We know exactly what it takes — because we've already done it. Now, as a fully registered <strong>501(c) charitable organization</strong>, we're coming back with a clear mission: every dollar raised goes to support our local VFW.</p>
     </div>
-
     <div class="credentials-grid">
       <div class="cred-item">
         <h4>✅ Proven Event Organizers</h4>
-        <p>We ran the 2013 festival successfully — same logistics team, same commitment to quality, zero guesswork on what works.</p>
+        <p>We ran the 2013 festival — same logistics team, same commitment, zero guesswork on what works.</p>
       </div>
       <div class="cred-item">
         <h4>🏛️ Established 501(c) Nonprofit</h4>
-        <p>The Edelweiss Lodge is a registered charitable organization. Your donation is accountable, transparent, and mission-driven.</p>
+        <p>The Edelweiss Lodge is a registered charitable organization. Your donation is accountable and transparent.</p>
       </div>
       <div class="cred-item">
         <h4>🤝 Deep Community Roots</h4>
-        <p>Our Lodge has been part of Connecticut's fabric for generations — we know this community, and this community knows us.</p>
+        <p>Our Lodge has been part of Connecticut's fabric for generations — we know this community and it knows us.</p>
       </div>
       <div class="cred-item">
-        <h4>🎯 Clear Charitable Goal</h4>
-        <p>Net proceeds from the first festival go directly to the local VFW, supporting veterans who served this country.</p>
+        <h4>🎖️ Clear Charitable Goal</h4>
+        <p>Net proceeds from the first festival go directly to the local VFW, supporting veterans in our community.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider" style="padding:1.5rem 2rem;"><span class="divider-icon">🍺</span></div>
+<div class="divider argyle" style="padding:1.5rem 2rem;"><span class="divider-icon">🍺</span></div>
 
 <!-- WHAT WE NEED -->
-<section class="what-we-need">
+<section class="what-we-need argyle">
   <div class="container">
     <p class="section-label">What It Takes</p>
     <h2 class="section-title">This Festival Needs Three Things</h2>
@@ -895,7 +875,7 @@
       <div class="need-item">
         <span class="need-icon">🤝</span>
         <h3>Volunteer Hands</h3>
-        <p>Grassroots festivals run on local muscle. <button onclick="showPage('volunteer')" style="background:none;border:none;color:var(--amber);cursor:pointer;font-family:inherit;font-size:inherit;text-decoration:underline;padding:0;">Sign up to volunteer →</button></p>
+        <p>Grassroots festivals run on local muscle. <button onclick="showPage('volunteer')" style="background:none;border:none;color:var(--blue);cursor:pointer;font-family:inherit;font-size:inherit;text-decoration:underline;padding:0;">Sign up to volunteer →</button></p>
       </div>
       <div class="need-item">
         <span class="need-icon">📢</span>
@@ -911,34 +891,30 @@
   <div class="container">
     <p class="section-label">Social Media Toolkit</p>
     <h2 class="section-title">Ready-to-Post Copy</h2>
-    <p class="section-intro">Copy these posts and share them on your own social channels. Every share reaches new potential attendees and donors.</p>
+    <p class="section-intro">Copy these posts and share them on your own channels. Every share reaches new potential attendees and donors.</p>
     <div class="posts-grid">
 
       <div class="post-card">
         <span class="post-platform">Facebook · Awareness Post</span>
         <button class="copy-btn" onclick="copyPost(this)">Copy</button>
-        <div class="post-body">Remember Guilford's Shoreline Oktoberfest back in 2013? Cold beer, live music, and the whole town together by the water on a crisp fall day.
+        <div class="post-body">Remember Guilford's Shoreline Oktoberfest back in 2013? Three days at the Guilford Fairgrounds — cold Hofbräuhaus beer, Jimmy Sturr & His Orchestra, bratwurst, and the whole town together.
 
-The same group that organized it in 2013 — the Edelweiss Lodge of the Hermann Sons of Connecticut — wants to bring it back. And this time, proceeds go to our local VFW.
+The same group that organized it — the Edelweiss Lodge of the Hermann Sons of Connecticut — wants to bring it back. And this time, proceeds go to our local VFW.
 
-We need to show there's real community support. Take 30 seconds to sign our free interest pledge:
+Sign our free interest pledge: 👉 [LINK]
 
-👉 [LINK]
-
-If you were there in 2013, tag someone who remembers it. Let's make this happen.</div>
+Tag someone who was there in 2013!</div>
         <div class="post-hashtags">#GuilfordCT #ShorelineOktoberfest #BringItBack #ConnecticutEvents #VFW #EdelweissLodge</div>
       </div>
 
       <div class="post-card">
         <span class="post-platform">Instagram · Short Hook</span>
         <button class="copy-btn" onclick="copyPost(this)">Copy</button>
-        <div class="post-body">🍺 Guilford had an Oktoberfest by the water in 2013 and it was absolutely magical.
+        <div class="post-body">🍺 Guilford had an Oktoberfest by the water in 2013 and it was absolutely magical. Hofbräuhaus beer, live polka bands, bratwurst, and the whole shoreline community together.
 
 The same team that built it is back — and this time, every dollar raised goes to our local VFW.
 
-Tap the link in bio to sign our free interest pledge. Takes 30 seconds, costs nothing.
-
-Autumn on the CT shoreline deserves a real festival. Let's bring it back. 🍂</div>
+Link in bio to sign the free interest pledge. 🍂</div>
         <div class="post-hashtags">#GuilfordCT #Oktoberfest #CTShoreline #ConnecticutFall #VFW #EdelweissLodge #HermannSons</div>
       </div>
 
@@ -947,7 +923,7 @@ Autumn on the CT shoreline deserves a real festival. Let's bring it back. 🍂</
         <button class="copy-btn" onclick="copyPost(this)">Copy</button>
         <div class="post-body">The team behind Guilford CT's 2013 Shoreline Oktoberfest wants to bring it back — and donate proceeds to the local VFW.
 
-Sign the free interest pledge if you want to see this happen → [LINK]
+Sign the free interest pledge → [LINK]
 
 RT if you love fall on the CT shoreline 🍂🍺</div>
         <div class="post-hashtags">#GuilfordCT #CTEvents #Oktoberfest #VFW</div>
@@ -958,13 +934,11 @@ RT if you love fall on the CT shoreline 🍂🍺</div>
         <button class="copy-btn" onclick="copyPost(this)">Copy</button>
         <div class="post-body">Hey Guilford neighbors 👋
 
-The Edelweiss Lodge of the Hermann Sons of Connecticut — the same group that organized the 2013 Shoreline Oktoberfest — is looking to bring the festival back, with proceeds going to our local VFW.
+The Edelweiss Lodge of the Hermann Sons of Connecticut — the same group that organized the 2013 Shoreline Oktoberfest at the Guilford Fairgrounds — is looking to bring the festival back, with proceeds going to our local VFW.
 
-Before we approach vendors, sponsors, or the town, we want to gauge real interest. There's a quick free pledge form at [LINK] — no commitment, just your name.
+Quick free pledge at [LINK] — no commitment, just your name. Also a volunteer sign-up page if you'd like to help out.
 
-We're also looking for volunteers! If you'd be interested in helping out at the festival, there's a volunteer sign-up page at the same link.
-
-Thanks, Guilford. Let's make something happen this fall.</div>
+Thanks, Guilford. Let's make this happen.</div>
         <div class="post-hashtags">#GuilfordCT #LocalEvents #Oktoberfest #VFW</div>
       </div>
 
@@ -975,13 +949,11 @@ Thanks, Guilford. Let's make something happen this fall.</div>
 
 Hey,
 
-Quick note — the Edelweiss Lodge of the Hermann Sons of Connecticut (the same group that organized the original 2013 Guilford Shoreline Oktoberfest) is trying to revive the festival, with net proceeds going to the local VFW.
+The Edelweiss Lodge of the Hermann Sons of Connecticut — the same group that organized the original 2013 Guilford Shoreline Oktoberfest — is trying to revive the festival, with net proceeds going to the local VFW.
 
-We're gauging community interest with a simple free pledge — takes less than a minute. Here's the link: [LINK]
+Simple free pledge (under a minute): [LINK]
 
-There's also a volunteer sign-up page if you'd be interested in helping out at the event.
-
-If you know anyone from Guilford or the CT shoreline who might want to attend or volunteer, please pass this along!
+There's also a volunteer sign-up if you'd like to help out at the event. Pass this along to anyone who loves Guilford or the CT shoreline!
 
 Thanks,
 [Your name]</div>
@@ -999,33 +971,23 @@ Thanks,
       <div class="form-info">
         <p class="section-label">Sign the Pledge</p>
         <h3>Tell us you're <em>in</em></h3>
-        <p style="color:#9a8a6a;line-height:1.8;font-size:0.95rem;">This isn't a ticket purchase or a legal commitment — it's a signal. Your name tells organizers, sponsors, and the town of Guilford that there's real community appetite for this festival.</p>
+        <p style="color:var(--light-blue);line-height:1.8;font-size:0.95rem;">This isn't a ticket purchase — it's a signal. Your name tells organizers, sponsors, and the town of Guilford that there's real community appetite for this festival.</p>
         <div class="tally-box">
           <p>Interest Pledges So Far</p>
           <div class="tally-count" id="counter">0</div>
           <p class="tally-sub">Be among the first to sign</p>
         </div>
-        <div style="margin-top:1.5rem; padding:1.2rem; border:1px solid rgba(74,138,76,0.25); background:rgba(44,74,46,0.08);">
-          <p style="font-family:'Special Elite',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#6aaf6c;margin-bottom:0.5rem;">Want to do more?</p>
-          <p style="font-size:0.88rem;color:#7a8a6a;line-height:1.6;margin-bottom:0.8rem;">Join our volunteer crew — we need help before, during, and after the festival.</p>
-          <button onclick="showPage('volunteer')" class="btn btn-green" style="padding:0.6rem 1.4rem;font-size:0.75rem;">Sign Up to Volunteer →</button>
+        <div style="margin-top:1.5rem;padding:1.2rem;border:1px solid rgba(74,144,196,0.3);background:rgba(74,144,196,0.08);">
+          <p style="font-family:'Special Elite',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Want to do more?</p>
+          <p style="font-size:0.88rem;color:var(--light-blue);line-height:1.6;margin-bottom:0.8rem;">Join our volunteer crew — we need help before, during, and after the festival.</p>
+          <button onclick="showPage('volunteer')" class="btn btn-gold" style="padding:0.6rem 1.4rem;font-size:0.75rem;">Sign Up to Volunteer →</button>
         </div>
       </div>
-
       <div>
         <div class="form-fields" id="pledgeForm">
-          <div class="field-group">
-            <label>Your Name</label>
-            <input type="text" id="fname" placeholder="First & Last Name" />
-          </div>
-          <div class="field-group">
-            <label>Email Address</label>
-            <input type="email" id="femail" placeholder="you@example.com" />
-          </div>
-          <div class="field-group">
-            <label>Town / Neighborhood</label>
-            <input type="text" id="ftown" placeholder="Guilford, Madison, etc." />
-          </div>
+          <div class="field-group"><label>Your Name</label><input type="text" id="fname" placeholder="First & Last Name" /></div>
+          <div class="field-group"><label>Email Address</label><input type="email" id="femail" placeholder="you@example.com" /></div>
+          <div class="field-group"><label>Town / Neighborhood</label><input type="text" id="ftown" placeholder="Guilford, Madison, etc." /></div>
           <div class="field-group">
             <label>Were you at the 2013 Oktoberfest?</label>
             <select id="fattended">
@@ -1047,20 +1009,10 @@ Thanks,
               <option>Just signing the interest pledge for now</option>
             </select>
           </div>
-          <div class="field-group">
-            <label>Anything else you'd love to see at the festival?</label>
-            <textarea id="fnotes" placeholder="Live bands, specific food vendors, activities for kids, local breweries..."></textarea>
-          </div>
-          <div class="checkbox-row">
-            <input type="checkbox" id="fnotify" />
-            <span>Keep me posted via email when updates are announced about the festival</span>
-          </div>
-          <div class="submit-row">
-            <button class="btn btn-primary" onclick="submitPledge()">Count Me In →</button>
-          </div>
-          <div class="success-msg" id="successMsg">
-            ✓ &nbsp; You're on the list! Thank you for supporting the Guilford Shoreline Oktoberfest revival. Share the campaign to help us reach more neighbors.
-          </div>
+          <div class="field-group"><label>Anything you'd love to see at the festival?</label><textarea id="fnotes" placeholder="Live bands, specific food vendors, activities for kids, local breweries..."></textarea></div>
+          <div class="checkbox-row"><input type="checkbox" id="fnotify" /><span>Keep me posted via email when updates are announced</span></div>
+          <div class="submit-row"><button class="btn btn-primary" onclick="submitPledge()">Count Me In →</button></div>
+          <div class="success-msg" id="successMsg">✓ &nbsp; You're on the list! Thank you for supporting the Guilford Shoreline Oktoberfest revival.</div>
           <p class="form-note">No spam, ever. Your email is only used for festival updates if you opt in above.</p>
         </div>
       </div>
@@ -1068,55 +1020,20 @@ Thanks,
   </div>
 </section>
 
-<div class="divider" style="padding:1.5rem 2rem;"><span class="divider-icon">🍁</span></div>
+<div class="divider argyle" style="padding:1.5rem 2rem;"><span class="divider-icon">🍁</span></div>
 
-<!-- CAMPAIGN PHASES -->
-<section class="phases">
+<!-- PHASES -->
+<section class="phases argyle">
   <div class="container">
     <p class="section-label">The Roadmap</p>
     <h2 class="section-title">How This Comes Together</h2>
     <p class="section-intro" style="margin-bottom:2.5rem;">A grassroots campaign builds in stages. Here's where we're going.</p>
     <div class="phases-list">
-      <div class="phase">
-        <div class="phase-num">01</div>
-        <div>
-          <h3>Gauge Community Interest</h3>
-          <p>Collect interest pledges and volunteer sign-ups through this page and social media. Our goal: 200 signatures that show real, local demand.</p>
-          <span class="phase-tag">📍 We Are Here</span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="phase-num">02</div>
-        <div>
-          <h3>Approach Local Businesses &amp; Sponsors</h3>
-          <p>Armed with pledge numbers and donation data, approach Guilford-area businesses, breweries, and restaurants about sponsorship.</p>
-          <span class="phase-tag">🎯 Next Step</span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="phase-num">03</div>
-        <div>
-          <h3>Launch GoFundMe Campaign</h3>
-          <p>Open our formal GoFundMe with a $50,000 goal — covering permits, venue, entertainment, and logistics — so the festival's profits go entirely to the VFW.</p>
-          <span class="phase-tag">💰 Funding Phase</span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="phase-num">04</div>
-        <div>
-          <h3>Secure the Venue &amp; Date</h3>
-          <p>Work with the Town of Guilford to lock in a waterfront location and an October date. Build out the volunteer team from our sign-up list.</p>
-          <span class="phase-tag">📅 Logistics</span>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="phase-num">05</div>
-        <div>
-          <h3>Guilford Shoreline Oktoberfest Returns 🍺</h3>
-          <p>Cold beer, live music, local food, autumn air, the CT shoreline — and a donation to our local VFW. If the community shows up now, the festival shows up in October.</p>
-          <span class="phase-tag">🎉 The Goal</span>
-        </div>
-      </div>
+      <div class="phase"><div class="phase-num">01</div><div><h3>Gauge Community Interest</h3><p>Collect interest pledges and volunteer sign-ups. Our goal: 200 signatures that show real, local demand to organizers and the town.</p><span class="phase-tag">📍 We Are Here</span></div></div>
+      <div class="phase"><div class="phase-num">02</div><div><h3>Approach Local Businesses &amp; Sponsors</h3><p>Armed with pledge numbers, approach Guilford-area businesses, breweries, and restaurants about sponsorship.</p><span class="phase-tag">🎯 Next Step</span></div></div>
+      <div class="phase"><div class="phase-num">03</div><div><h3>Launch GoFundMe — $50,000 Goal</h3><p>Open our formal GoFundMe covering permits, venue, entertainment, and logistics — so festival profits go entirely to the VFW.</p><span class="phase-tag">💰 Funding Phase</span></div></div>
+      <div class="phase"><div class="phase-num">04</div><div><h3>Secure the Guilford Fairgrounds &amp; Date</h3><p>Lock in Lover's Lane for an October weekend and build out the volunteer team from our sign-up list.</p><span class="phase-tag">📅 Logistics</span></div></div>
+      <div class="phase"><div class="phase-num">05</div><div><h3>Guilford Shoreline Oktoberfest Returns 🍺</h3><p>Cold beer, live music, local food, autumn air, the CT shoreline — and a donation to our local VFW veterans.</p><span class="phase-tag">🎉 The Goal</span></div></div>
     </div>
   </div>
 </section>
@@ -1124,111 +1041,38 @@ Thanks,
 <footer>
   <div class="footer-brand">Guilford Shoreline Oktoberfest</div>
   <p>Organized by the Edelweiss Lodge of the Hermann Sons of Connecticut · 501(c) Nonprofit</p>
-  <p style="margin-top:0.5rem;">Benefiting the Local VFW · Guilford, Connecticut</p>
-  <p style="margin-top:1.5rem;">Questions? Reach out at <span style="color:var(--amber);">[your email here]</span></p>
+  <p>Benefiting the Local VFW · Guilford Fairgrounds, Lover's Lane, Guilford CT</p>
+  <p style="margin-top:1.5rem;">Questions? Reach out at <span style="color:var(--gold);">[your email here]</span></p>
 </footer>
-
 </div><!-- end page-main -->
 
-<!-- ===================== VOLUNTEER PAGE ===================== -->
+<!-- ===== VOLUNTEER PAGE ===== -->
 <div class="page" id="page-volunteer">
 
 <section class="volunteer-hero">
   <div class="vol-badge">Edelweiss Lodge · Hermann Sons of CT</div>
   <h1>Join the<br><span class="accent">Volunteer Crew</span></h1>
   <p>The Guilford Shoreline Oktoberfest runs on community spirit — and that means people like you. Tell us how you'd like to help and we'll be in touch when it's go time.</p>
-  <button onclick="document.getElementById('vol-form-anchor').scrollIntoView({behavior:'smooth'})" class="btn btn-green">Sign Me Up</button>
+  <button onclick="document.getElementById('vol-form-anchor').scrollIntoView({behavior:'smooth'})" class="btn btn-gold">Sign Me Up</button>
 </section>
 
 <!-- ROLES -->
-<section class="volunteer-roles">
+<section class="volunteer-roles argyle">
   <div class="container">
     <p class="vol-section-label">Volunteer Roles</p>
-    <h2 class="section-title" style="color:var(--cream);">Where We Need Help</h2>
-    <p class="section-intro">Click the roles that interest you — your selections will carry into the sign-up form below.</p>
-
+    <h2 class="section-title">Where We Need Help</h2>
+    <p class="section-intro">Click the roles that interest you — your selections carry into the sign-up form below.</p>
     <div class="roles-grid" id="rolesGrid">
-
-      <div class="role-card" onclick="toggleRole(this, 'Setup & Breakdown Crew')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">🏗️</span>
-        <h3>Setup & Breakdown Crew</h3>
-        <p>Help assemble tents, tables, signage, and equipment before the festival and pack everything down afterward.</p>
-        <span class="role-time">⏰ Day before + day after</span>
-      </div>
-
-      <div class="role-card" onclick="toggleRole(this, 'Beer Garden Staff')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">🍺</span>
-        <h3>Beer Garden Staff</h3>
-        <p>Pour steins, manage the beer garden, check wristbands, and keep things flowing smoothly at the bar areas.</p>
-        <span class="role-time">⏰ Day of festival · must be 21+</span>
-      </div>
-
-      <div class="role-card" onclick="toggleRole(this, 'Food Vendor Liaison')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">🌭</span>
-        <h3>Food Vendor Liaison</h3>
-        <p>Coordinate with food vendors on arrival, placement, and logistics throughout the event day.</p>
-        <span class="role-time">⏰ Day of festival</span>
-      </div>
-
-      <div class="role-card" onclick="toggleRole(this, 'Ticket & Gate Staff')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">🎟️</span>
-        <h3>Ticket & Gate Staff</h3>
-        <p>Manage festival entry — scan tickets, hand out wristbands, and welcome guests at the entrance.</p>
-        <span class="role-time">⏰ Day of festival</span>
-      </div>
-
-      <div class="role-card" onclick="toggleRole(this, 'Entertainment Coordinator')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">🎶</span>
-        <h3>Entertainment Coordinator</h3>
-        <p>Help coordinate with bands and performers — backstage logistics, scheduling, and stage setup support.</p>
-        <span class="role-time">⏰ Day of festival</span>
-      </div>
-
-      <div class="role-card" onclick="toggleRole(this, 'Kids & Family Activities')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">🎈</span>
-        <h3>Kids & Family Activities</h3>
-        <p>Run games, activities, and the family-friendly area of the festival. Great for those with kids of their own!</p>
-        <span class="role-time">⏰ Day of festival</span>
-      </div>
-
-      <div class="role-card" onclick="toggleRole(this, 'VFW Donation & Awareness Table')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">🎖️</span>
-        <h3>VFW Donation & Awareness Table</h3>
-        <p>Staff our VFW awareness table — share information about how festival proceeds benefit local veterans.</p>
-        <span class="role-time">⏰ Day of festival</span>
-      </div>
-
-      <div class="role-card" onclick="toggleRole(this, 'Social Media & Photography')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">📸</span>
-        <h3>Social Media & Photography</h3>
-        <p>Capture the day and post live coverage to help spread the word during and after the festival.</p>
-        <span class="role-time">⏰ Day of festival</span>
-      </div>
-
-      <div class="role-card" onclick="toggleRole(this, 'General Volunteer / Wherever Needed')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">🙋</span>
-        <h3>General Volunteer</h3>
-        <p>Happy to help wherever the need is greatest on the day. The backbone of any great community festival.</p>
-        <span class="role-time">⏰ Flexible</span>
-      </div>
-
-      <div class="role-card" onclick="toggleRole(this, 'Pre-Event Planning & Outreach')">
-        <span class="role-check">✓</span>
-        <span class="role-icon">📋</span>
-        <h3>Pre-Event Planning & Outreach</h3>
-        <p>Help with logistics, vendor outreach, or community promotion in the weeks and months before the event.</p>
-        <span class="role-time">⏰ Weeks before the festival</span>
-      </div>
-
+      <div class="role-card" onclick="toggleRole(this,'Setup & Breakdown Crew')"><span class="role-check">✓</span><span class="role-icon">🏗️</span><h3>Setup & Breakdown Crew</h3><p>Help assemble tents, tables, signage, and equipment before the festival and pack down afterward.</p><span class="role-time">⏰ Day before + day after</span></div>
+      <div class="role-card" onclick="toggleRole(this,'Beer Garden Staff')"><span class="role-check">✓</span><span class="role-icon">🍺</span><h3>Beer Garden Staff</h3><p>Pour steins, manage the beer garden, check wristbands, and keep things flowing at the bar areas.</p><span class="role-time">⏰ Day of festival · must be 21+</span></div>
+      <div class="role-card" onclick="toggleRole(this,'Food Vendor Liaison')"><span class="role-check">✓</span><span class="role-icon">🌭</span><h3>Food Vendor Liaison</h3><p>Coordinate with food vendors on arrival, placement, and logistics throughout the event day.</p><span class="role-time">⏰ Day of festival</span></div>
+      <div class="role-card" onclick="toggleRole(this,'Ticket & Gate Staff')"><span class="role-check">✓</span><span class="role-icon">🎟️</span><h3>Ticket & Gate Staff</h3><p>Manage festival entry — scan tickets, hand out wristbands, and welcome guests at the entrance.</p><span class="role-time">⏰ Day of festival</span></div>
+      <div class="role-card" onclick="toggleRole(this,'Entertainment Coordinator')"><span class="role-check">✓</span><span class="role-icon">🎶</span><h3>Entertainment Coordinator</h3><p>Help coordinate with bands and performers — backstage logistics, scheduling, and stage support.</p><span class="role-time">⏰ Day of festival</span></div>
+      <div class="role-card" onclick="toggleRole(this,'Kids & Family Activities')"><span class="role-check">✓</span><span class="role-icon">🎈</span><h3>Kids & Family Activities</h3><p>Run games, activities, and the family-friendly area of the festival.</p><span class="role-time">⏰ Day of festival</span></div>
+      <div class="role-card" onclick="toggleRole(this,'VFW Donation & Awareness Table')"><span class="role-check">✓</span><span class="role-icon">🎖️</span><h3>VFW Donation & Awareness Table</h3><p>Staff our VFW awareness table — share information about how festival proceeds benefit local veterans.</p><span class="role-time">⏰ Day of festival</span></div>
+      <div class="role-card" onclick="toggleRole(this,'Social Media & Photography')"><span class="role-check">✓</span><span class="role-icon">📸</span><h3>Social Media & Photography</h3><p>Capture the day and post live coverage to help spread the word during and after the festival.</p><span class="role-time">⏰ Day of festival</span></div>
+      <div class="role-card" onclick="toggleRole(this,'General Volunteer / Wherever Needed')"><span class="role-check">✓</span><span class="role-icon">🙋</span><h3>General Volunteer</h3><p>Happy to help wherever the need is greatest. The backbone of any great community festival.</p><span class="role-time">⏰ Flexible</span></div>
+      <div class="role-card" onclick="toggleRole(this,'Pre-Event Planning & Outreach')"><span class="role-check">✓</span><span class="role-icon">📋</span><h3>Pre-Event Planning & Outreach</h3><p>Help with logistics, vendor outreach, or community promotion in the weeks before the event.</p><span class="role-time">⏰ Weeks before the festival</span></div>
     </div>
   </div>
 </section>
@@ -1238,93 +1082,45 @@ Thanks,
   <div class="container">
     <div class="vol-form-grid">
       <div class="vol-form-info">
-        <p class="vol-section-label">Sign Up</p>
+        <p class="vol-section-label" style="color:var(--gold);">Sign Up</p>
         <h2>Ready to <em>roll up your sleeves?</em></h2>
-        <p>Fill out the form and we'll reach out when volunteer scheduling begins. The more detail you give us about your availability and skills, the better we can match you to a role you'll love.</p>
-        <p>Every volunteer who signs up will receive a complimentary festival wristband as our thank-you for making this happen.</p>
+        <p>Fill out the form and we'll reach out when volunteer scheduling begins. Every volunteer who signs up will receive a complimentary festival wristband as our thank-you.</p>
         <div class="vol-tally-box">
           <p>Volunteers Signed Up</p>
           <div class="vol-tally-count" id="vol-counter">0</div>
-          <p style="font-family:'Special Elite',monospace;font-size:0.7rem;letter-spacing:0.15em;color:#3a5a3a;margin-top:4px;">BE AMONG THE FIRST</p>
+          <p style="font-family:'Special Elite',monospace;font-size:0.7rem;letter-spacing:0.15em;color:var(--mid-blue);margin-top:4px;">BE AMONG THE FIRST</p>
         </div>
-        <div style="margin-top:1.5rem;padding:1.2rem;border:1px solid rgba(200,118,26,0.2);background:rgba(200,118,26,0.04);">
-          <p style="font-family:'Special Elite',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:0.5rem;">Not ready to volunteer?</p>
-          <p style="font-size:0.88rem;color:#7a6a4a;line-height:1.6;margin-bottom:0.8rem;">Sign the community interest pledge instead — it only takes 30 seconds.</p>
-          <button onclick="showPage('main'); setTimeout(()=>document.getElementById('pledge').scrollIntoView({behavior:'smooth'}),50)" class="btn btn-outline" style="padding:0.6rem 1.4rem;font-size:0.75rem;">Sign the Pledge →</button>
+        <div style="margin-top:1.5rem;padding:1.2rem;border:1px solid rgba(245,166,35,0.25);background:rgba(245,166,35,0.06);">
+          <p style="font-family:'Special Elite',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Not ready to volunteer?</p>
+          <p style="font-size:0.88rem;color:var(--light-blue);line-height:1.6;margin-bottom:0.8rem;">Sign the community interest pledge instead — takes 30 seconds.</p>
+          <button onclick="showPage('main');setTimeout(()=>document.getElementById('pledge').scrollIntoView({behavior:'smooth'}),50)" class="btn btn-outline" style="padding:0.6rem 1.4rem;font-size:0.75rem;">Sign the Pledge →</button>
         </div>
       </div>
-
-      <div>
-        <div id="volForm">
-          <div class="vol-field-group">
-            <label>Your Name *</label>
-            <input type="text" id="vname" placeholder="First & Last Name" />
+      <div id="volForm">
+        <div class="vol-field-group"><label>Your Name *</label><input type="text" id="vname" placeholder="First & Last Name" /></div>
+        <div class="vol-field-group"><label>Email Address *</label><input type="email" id="vemail" placeholder="you@example.com" /></div>
+        <div class="vol-field-group"><label>Phone Number</label><input type="tel" id="vphone" placeholder="(203) 555-0100" /></div>
+        <div class="vol-field-group"><label>Town / Neighborhood</label><input type="text" id="vtown" placeholder="Guilford, Madison, etc." /></div>
+        <div class="vol-field-group"><label>Age Range</label><select id="vage"><option value="">— Select —</option><option>18–25</option><option>26–35</option><option>36–50</option><option>51–65</option><option>65+</option></select></div>
+        <div class="vol-field-group"><label>Roles you selected above</label><div class="selected-roles-display" id="selectedRolesDisplay"><em style="color:rgba(74,144,196,0.5);">No roles selected yet — click the cards above to choose</em></div></div>
+        <div class="vol-field-group">
+          <label>Availability</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+            <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Day before (setup)" /><span>Day before (setup)</span></div>
+            <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Morning of festival" /><span>Morning of festival</span></div>
+            <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Afternoon of festival" /><span>Afternoon of festival</span></div>
+            <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Evening of festival" /><span>Evening of festival</span></div>
+            <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Day after (cleanup)" /><span>Day after (cleanup)</span></div>
+            <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Pre-event weeks" /><span>Weeks before event</span></div>
           </div>
-          <div class="vol-field-group">
-            <label>Email Address *</label>
-            <input type="email" id="vemail" placeholder="you@example.com" />
-          </div>
-          <div class="vol-field-group">
-            <label>Phone Number</label>
-            <input type="tel" id="vphone" placeholder="(203) 555-0100" />
-          </div>
-          <div class="vol-field-group">
-            <label>Town / Neighborhood</label>
-            <input type="text" id="vtown" placeholder="Guilford, Madison, etc." />
-          </div>
-          <div class="vol-field-group">
-            <label>Age Range</label>
-            <select id="vage">
-              <option value="">— Select —</option>
-              <option>18–25</option>
-              <option>26–35</option>
-              <option>36–50</option>
-              <option>51–65</option>
-              <option>65+</option>
-            </select>
-          </div>
-          <div class="vol-field-group">
-            <label>Roles you selected above</label>
-            <div class="selected-roles-display" id="selectedRolesDisplay">
-              <em style="color:#5a6a4a;">No roles selected yet — click the cards above to choose</em>
-            </div>
-          </div>
-          <div class="vol-field-group">
-            <label>Availability</label>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
-              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Day before (setup)" /><span>Day before (setup)</span></div>
-              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Morning of festival" /><span>Morning of festival</span></div>
-              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Afternoon of festival" /><span>Afternoon of festival</span></div>
-              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Evening of festival" /><span>Evening of festival</span></div>
-              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Day after (cleanup)" /><span>Day after (cleanup)</span></div>
-              <div class="vol-checkbox-row"><input type="checkbox" class="avail" value="Pre-event weeks" /><span>Weeks before event</span></div>
-            </div>
-          </div>
-          <div class="vol-field-group">
-            <label>Any relevant skills or experience?</label>
-            <textarea id="vskills" placeholder="e.g. bartending, event planning, photography, first aid, bilingual, etc."></textarea>
-          </div>
-          <div class="vol-field-group">
-            <label>T-shirt size (for volunteer shirts)</label>
-            <select id="vsize">
-              <option value="">— Select —</option>
-              <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
-            </select>
-          </div>
-          <div class="vol-checkbox-row" style="margin-bottom:1rem;">
-            <input type="checkbox" id="v21" />
-            <span>I am 21 years of age or older (required for beer garden roles)</span>
-          </div>
-          <div class="vol-checkbox-row" style="margin-bottom:1.2rem;">
-            <input type="checkbox" id="vnotify" />
-            <span>Keep me updated by email as volunteer scheduling gets underway</span>
-          </div>
-          <button class="vol-submit-btn" onclick="submitVolunteer()">Sign Me Up to Volunteer →</button>
-          <div class="vol-success-msg" id="volSuccessMsg">
-            ✓ &nbsp; You're on the volunteer list! We'll be in touch as the festival takes shape. Thank you for helping make this happen.
-          </div>
-          <p class="form-note" style="color:#3a5a3a;margin-top:0.8rem;">No spam. Your info is only used to coordinate volunteer scheduling for the Guilford Shoreline Oktoberfest.</p>
         </div>
+        <div class="vol-field-group"><label>Any relevant skills or experience?</label><textarea id="vskills" placeholder="e.g. bartending, event planning, photography, first aid, bilingual..."></textarea></div>
+        <div class="vol-field-group"><label>T-shirt size (for volunteer shirts)</label><select id="vsize"><option value="">— Select —</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
+        <div class="vol-checkbox-row" style="margin-bottom:1rem;"><input type="checkbox" id="v21" /><span>I am 21 years of age or older (required for beer garden roles)</span></div>
+        <div class="vol-checkbox-row" style="margin-bottom:1.2rem;"><input type="checkbox" id="vnotify" /><span>Keep me updated by email as volunteer scheduling gets underway</span></div>
+        <button class="vol-submit-btn" onclick="submitVolunteer()">Sign Me Up to Volunteer →</button>
+        <div class="vol-success-msg" id="volSuccessMsg">✓ &nbsp; You're on the volunteer list! We'll be in touch as the festival takes shape. Thank you!</div>
+        <p class="form-note" style="color:rgba(74,144,196,0.4);margin-top:0.8rem;">No spam. Your info is only used to coordinate volunteer scheduling.</p>
       </div>
     </div>
   </div>
@@ -1333,102 +1129,138 @@ Thanks,
 <footer>
   <div class="footer-brand">Guilford Shoreline Oktoberfest</div>
   <p>Organized by the Edelweiss Lodge of the Hermann Sons of Connecticut · 501(c) Nonprofit</p>
-  <p style="margin-top:0.5rem;">Benefiting the Local VFW · Guilford, Connecticut</p>
-  <p style="margin-top:1.5rem;">Questions about volunteering? Reach out at <span style="color:var(--amber);">[your email here]</span></p>
+  <p>Benefiting the Local VFW · Guilford Fairgrounds, Lover's Lane, Guilford CT</p>
+  <p style="margin-top:1.5rem;">Questions about volunteering? Reach out at <span style="color:var(--gold);">[your email here]</span></p>
 </footer>
 
 </div><!-- end page-volunteer -->
 
 <script>
-  // PAGE NAVIGATION
   function showPage(name) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('page-' + name).classList.add('active');
     document.querySelectorAll('.nav-tab')[name === 'main' ? 0 : 1].classList.add('active');
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // PLEDGE COUNTER
   let count = parseInt(localStorage.getItem('oktofest_count') || '0');
+  let volCount = parseInt(localStorage.getItem('oktofest_vol_count') || '0');
   const counterEl = document.getElementById('counter');
+  const volCounterEl = document.getElementById('vol-counter');
   counterEl.textContent = count;
+  volCounterEl.textContent = volCount;
 
   function animateCounter(el, from, to) {
     const duration = 1200;
     const start = performance.now();
     function update(now) {
       const p = Math.min((now - start) / duration, 1);
-      const e = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(from + (to - from) * e);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (to - from) * eased);
       if (p < 1) requestAnimationFrame(update);
       else el.textContent = to;
     }
     requestAnimationFrame(update);
   }
 
-function submitPledge() {
-  const name = document.getElementById('fname').value.trim();
-  const email = document.getElementById('femail').value.trim();
-  if (!name || !email) {
-    alert('Please enter your name and email to sign the pledge.');
-    return;
-  }
-
-  const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdDyx08T9a3Ronk3WwacYcSHEEC70sOiRiFDIWsdi4bTiBytQ/formResponse';
-
-  const data = new FormData();
-  data.append('entry.181684355', name);
-  data.append('entry.585634340', document.getElementById('femail').value.trim());
-  data.append('entry.1747944111', document.getElementById('ftown').value.trim());
-  data.append('entry.1789458142', document.getElementById('fattended').value);
-  data.append('entry.1615245840', document.getElementById('fdonate').value);
-  data.append('entry.119144972', document.getElementById('fnotes').value.trim());
-
-  // Use no-cors because Google Forms blocks cross-origin responses
-  fetch(FORM_ACTION, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: data
-  });
-
-  // Show thank-you immediately (can't read the response due to no-cors)
-  document.getElementById('successMsg').style.display = 'block';
-  document.querySelector('.submit-row').style.display = 'none';
-
-  const newCount = count + 1;
-  localStorage.setItem('oktofest_count', newCount);
-  animateCounter(counterEl, count, newCount);
-  count = newCount;
-}
-  
-  // VOLUNTEER COUNTER
-  let volCount = parseInt(localStorage.getItem('oktofest_vol_count') || '0');
-  const volCounterEl = document.getElementById('vol-counter');
-  volCounterEl.textContent = volCount;
-
-  // ROLE SELECTION
   let selectedRoles = [];
-
   function toggleRole(card, roleName) {
     card.classList.toggle('selected');
-    if (card.classList.contains('selected')) {
-      selectedRoles.push(roleName);
-    } else {
-      selectedRoles = selectedRoles.filter(r => r !== roleName);
-    }
+    if (card.classList.contains('selected')) { selectedRoles.push(roleName); }
+    else { selectedRoles = selectedRoles.filter(r => r !== roleName); }
     const display = document.getElementById('selectedRolesDisplay');
     if (selectedRoles.length === 0) {
-      display.innerHTML = '<em style="color:#5a6a4a;">No roles selected yet — click the cards above to choose</em>';
+      display.innerHTML = '<em style="color:rgba(74,144,196,0.5);">No roles selected yet — click the cards above to choose</em>';
     } else {
-      display.innerHTML = selectedRoles.map(r => '<span style="display:inline-block;background:rgba(74,138,76,0.15);border:1px solid rgba(74,138,76,0.3);color:#6aaf6c;font-size:0.78rem;padding:2px 8px;margin:2px 3px 2px 0;font-family:\'Special Elite\',monospace;">'+r+'</span>').join('');
+      display.innerHTML = selectedRoles.map(r =>
+        `<span style="display:inline-block;background:rgba(139,26,26,0.1);border:1px solid rgba(139,26,26,0.3);color:#8B1A1A;font-size:0.78rem;padding:2px 8px;margin:2px 3px 2px 0;font-family:'Special Elite',monospace;">${r}</span>`
+      ).join('');
     }
+  }
+
+  function submitPledge() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const town = document.getElementById('ftown').value.trim();
+    const attended = document.getElementById('fattended').value;
+    const donate = document.getElementById('fdonate').value;
+    const notes = document.getElementById('fnotes').value.trim();
+    const notify = document.getElementById('fnotify').checked ? 'Yes' : 'No';
+
+    const nameEl = document.getElementById('fname');
+    const emailEl = document.getElementById('femail');
+    [nameEl, emailEl].forEach(el => { el.style.borderColor = 'rgba(74,144,196,0.4)'; el.style.background = 'rgba(255,255,255,0.06)'; });
+
+    let valid = true;
+    if (!name) { nameEl.style.borderColor = '#8B1A1A'; nameEl.style.background = 'rgba(139,26,26,0.08)'; valid = false; }
+    if (!email || !email.includes('@')) { emailEl.style.borderColor = '#8B1A1A'; emailEl.style.background = 'rgba(139,26,26,0.08)'; valid = false; }
+    if (!valid) { alert('Please fill in your name and a valid email address.'); return; }
+
+    // ── REPLACE with your real Google Form URL and entry IDs ──
+    const PLEDGE_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_PLEDGE_FORM_ID/viewform';
+    const params = new URLSearchParams();
+    params.set('entry.111111', name);
+    params.set('entry.222222', email);
+    params.set('entry.333333', town);
+    params.set('entry.444444', attended);
+    params.set('entry.555555', donate);
+    params.set('entry.666666', notes);
+    params.set('entry.777777', notify);
+    window.open(`${PLEDGE_FORM_URL}?${params.toString()}`, '_blank');
+
+    const newCount = count + 1;
+    localStorage.setItem('oktofest_count', newCount);
+    animateCounter(counterEl, count, newCount);
+    count = newCount;
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.submit-row').style.display = 'none';
+    document.querySelector('.form-note').style.display = 'none';
   }
 
   function submitVolunteer() {
-    const name = document.getElementById('vname').value.trim();
-    const email = document.getElementById('vemail').value.trim();
-    if (!name || !email) { alert('Please enter your name and email to sign up.'); return; }
+    const name   = document.getElementById('vname').value.trim();
+    const email  = document.getElementById('vemail').value.trim();
+    const phone  = document.getElementById('vphone').value.trim();
+    const town   = document.getElementById('vtown').value.trim();
+    const age    = document.getElementById('vage').value;
+    const skills = document.getElementById('vskills').value.trim();
+    const size   = document.getElementById('vsize').value;
+    const is21   = document.getElementById('v21').checked ? 'Yes – I am 21 or older' : 'No';
+    const notify = document.getElementById('vnotify').checked ? 'Yes' : 'No';
+    const availChecked = [...document.querySelectorAll('.avail:checked')].map(cb => cb.value).join(', ');
+    const rolesText = selectedRoles.length > 0 ? selectedRoles.join(', ') : 'No specific role selected';
+
+    const vNameEl  = document.getElementById('vname');
+    const vEmailEl = document.getElementById('vemail');
+    [vNameEl, vEmailEl].forEach(el => { el.style.borderColor = 'rgba(74,144,196,0.35)'; el.style.background = 'rgba(255,255,255,0.05)'; });
+
+    let valid = true;
+    if (!name)  { vNameEl.style.borderColor = '#8B1A1A';  vNameEl.style.background = 'rgba(139,26,26,0.08)';  valid = false; }
+    if (!email || !email.includes('@')) { vEmailEl.style.borderColor = '#8B1A1A'; vEmailEl.style.background = 'rgba(139,26,26,0.08)'; valid = false; }
+    if (!valid) { alert('Please fill in your name and a valid email address.'); return; }
+
+    if (selectedRoles.length === 0) {
+      const proceed = confirm("You haven't selected any volunteer roles yet. Submit anyway, or cancel to go back and choose roles?");
+      if (!proceed) return;
+    }
+
+    // ── REPLACE with your real Google Form URL and entry IDs ──
+    const VOLUNTEER_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_VOLUNTEER_FORM_ID/viewform';
+    const params = new URLSearchParams();
+    params.set('entry.111111', name);
+    params.set('entry.222222', email);
+    params.set('entry.333333', phone);
+    params.set('entry.444444', town);
+    params.set('entry.555555', age);
+    params.set('entry.666666', rolesText);
+    params.set('entry.777777', availChecked || 'Not specified');
+    params.set('entry.888888', skills);
+    params.set('entry.999999', size);
+    params.set('entry.101010', is21);
+    params.set('entry.121212', notify);
+    window.open(`${VOLUNTEER_FORM_URL}?${params.toString()}`, '_blank');
+
     const newVol = volCount + 1;
     localStorage.setItem('oktofest_vol_count', newVol);
     animateCounter(volCounterEl, volCount, newVol);
@@ -1437,7 +1269,6 @@ function submitPledge() {
     document.querySelector('.vol-submit-btn').style.display = 'none';
   }
 
-  // COPY POSTS
   function copyPost(btn) {
     const card = btn.closest('.post-card');
     const body = card.querySelector('.post-body').textContent.trim();
@@ -1450,10 +1281,9 @@ function submitPledge() {
     });
   }
 
-  // SCROLL FADE-IN
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
     });
   }, { threshold: 0.1 });
 
