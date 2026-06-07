@@ -1236,21 +1236,22 @@ function submitVolunteer() {
   const age    = document.getElementById('vage').value;
   const skills = document.getElementById('vskills').value.trim();
   const size   = document.getElementById('vsize').value;
+  const rolesText = selectedRoles.length > 0 ? selectedRoles.join(', ') : 'No specific role selected';
 
-  // Availability checkboxes — multi-value field
   const availChecked = [...document.querySelectorAll('.avail:checked')].map(cb => cb.value);
 
   const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSf30Ut1QESmA8kFpWasguARKzDJbJvFOtG5UhkixLGhmPXVHg/formResponse';
 
   const data = new FormData();
-  data.append('entry.1346076868', vname);
-  data.append('entry.133104693',  vemail);
-  data.append('entry.117815489',  vphone);
-  data.append('entry.570994845',  vtown);
-  data.append('entry.843282456',  vage);
-  availChecked.forEach(val => data.append('entry.281715906', selectedRolesDisplay));
-  data.append('entry.1565048374', vskills);
-  data.append('entry.296787093',  vsize);
+  data.append('entry.1346076868', name);      // ✅ was: vname
+  data.append('entry.133104693',  email);     // ✅ was: vemail
+  data.append('entry.117815489',  phone);     // ✅ was: vphone
+  data.append('entry.570994845',  town);      // ✅ was: vtown
+  data.append('entry.843282456',  age);       // ✅ was: vage
+  data.append('entry.578755876',  rolesText); // ✅ roles as paragraph text
+  availChecked.forEach(val => data.append('entry.281715906', val)); // ✅ was: selectedRolesDisplay
+  data.append('entry.1565048374', skills);    // ✅ was: vskills
+  data.append('entry.296787093',  size);      // ✅ was: vsize
 
   fetch(FORM_ACTION, {
     method: 'POST',
@@ -1258,7 +1259,6 @@ function submitVolunteer() {
     body:   data
   });
 
-  // Update counter and show success
   const newVol = volCount + 1;
   localStorage.setItem('oktofest_vol_count', newVol);
   animateCounter(volCounterEl, volCount, newVol);
@@ -1266,7 +1266,6 @@ function submitVolunteer() {
   document.getElementById('volSuccessMsg').style.display = 'block';
   document.querySelector('.vol-submit-btn').style.display = 'none';
 }
-  
   
  
   function copyPost(btn) {
